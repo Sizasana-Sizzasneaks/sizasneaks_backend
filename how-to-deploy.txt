@@ -2,4 +2,4 @@ Deployment with heroku has been set up.
 Just make sure i am in the main branch, and have pulled the latest version from gitHub.
 After that i must push to the Heroku Repository, and it will complete depolyment for me.
 
-Command -> git push heroku master
+Command -> git push heroku main
