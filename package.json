@@ -1,0 +1,22 @@
+{
+  "name": "sizzasneaks_backend",
+  "version": "1.0.0",
+  "description": "The backend application for the sizzasneaks platform. ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MatamandoKalilani/sizzasneaks_backend.git"
+  },
+  "author": "Matamando Kalilani, Lukumo Kajimanga, Natasha Khumalo, Lara Msuri, Ameer Mahamed, Lusanda Mhlanga",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MatamandoKalilani/sizzasneaks_backend/issues"
+  },
+  "homepage": "https://github.com/MatamandoKalilani/sizzasneaks_backend#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
