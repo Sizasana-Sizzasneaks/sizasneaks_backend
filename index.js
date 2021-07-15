@@ -4,13 +4,24 @@ const mongoose = require("mongoose");
 
 const app = express();
 
-
 //MongoDB Database Connection URL
 const MDBCONNECTURL =
   "mongodb+srv://" + process.env.MONGODB_CONNECT_USERNAME +":" + process.env.MONGODB_CONNECT_PASSWORD + "@sizasana-sizzasneaks.wnfwn.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 
 //Server Port Number.
-  const port = process.env.PORT || 5000;
+const port = process.env.PORT || 5000;
+
+
+//Routes
+const productsRoutes = require("./routes/products.js")
+
+//Connect Routers
+app.use("/products", productsRoutes);
+
+
+
+
+
 
 //Connect to MongoDB Server and Running Server.  
 mongoose
@@ -31,6 +42,3 @@ mongoose
     console.log("MongoDB Database Connection Failed!");
     console.log(error);
   });
-
-//Link
-//mongodb+srv://coded19:<password>@sizasana-sizzasneaks.wnfwn.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
