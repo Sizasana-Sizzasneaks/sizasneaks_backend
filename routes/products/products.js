@@ -1,9 +1,9 @@
 var express = require("express");
 const router = express.Router();
-const ObjectId = require('mongoose').Types.ObjectId;
 
-//Get Products model
-const { Product } = require('../models/product');
+
+
+
 
 
 
