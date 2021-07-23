@@ -13,10 +13,12 @@ const port = process.env.PORT || 5000;
 
 
 //Routes
-const productsRoutes = require("./routes/products.js")
+const productsRoutes = require("./routes/products.js");
+const specificProductRoutes = require("./routes/specificProduct.js")
 
 //Connect Routers
 app.use("/products", productsRoutes);
+app.use("/product/:id", specificProductRoutes);
 
 
 

@@ -7,13 +7,11 @@ const { Product } = require('../models/product');
 
 
 
-//Get Products Controller & Route
-const getProducts = require("../controllers/products/getProducts.js");
-router.get("/",getProducts );
 
 
-
-
+//Get Specific Product
+const getSpecificProduct = require("../controllers/products/getSpecificProduct.js");
+router.get("/:id",getSpecificProduct);
 
 
 
