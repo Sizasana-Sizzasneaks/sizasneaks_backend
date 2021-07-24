@@ -19,7 +19,7 @@ function verifyUserIdToken(req, res, next) {
         })
         .catch((error) => {
           //Throw failed to verify token Error
-          throw new Error();
+          console.log(error);
         });
     } else {
       //Throw Token was not Supplied Error

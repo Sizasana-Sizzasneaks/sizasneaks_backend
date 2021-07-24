@@ -30,7 +30,7 @@ const MDBCONNECTURL =
   process.env.MONGODB_CONNECT_USERNAME +
   ":" +
   process.env.MONGODB_CONNECT_PASSWORD +
-  "@sizasana-sizzasneaks.wnfwn.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+  "@sizasana-sizzasneaks.wnfwn.mongodb.net/sizasana-sizzasneaks?retryWrites=true&w=majority";
 
 //Server Port Number.
 const port = process.env.PORT || 5000;
