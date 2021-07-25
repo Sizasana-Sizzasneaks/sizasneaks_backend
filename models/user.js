@@ -7,6 +7,7 @@ const CustomerSchema = new Schema({
     email: String,
     firstName: String,
     lastName: String,
+    mobileNumber: String,
     // shippingAddresses: [shippingAddress],
     // wishlist: [String],
     // cart: [ShoppingCartItem],
