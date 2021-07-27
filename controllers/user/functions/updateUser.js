@@ -1,8 +1,12 @@
 const mongoose = require("mongoose");
 const Customer = require("../../../models/user.js");
+const prepareUserData = require("./prepareUserData.js");
 
-function updateUser(userId, userData) {
-  return Customer.updateOne({ userId: userId }, userData)
+async function updateUser(userId, userData) {
+
+  var data = await prepareUserData(userData);
+
+  return Customer.updateOne({ userId: userId }, data)
     .then(() => {
       console.log("Update Worked");
       return { ok: true };

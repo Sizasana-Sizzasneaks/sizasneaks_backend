@@ -1,17 +1,28 @@
 const mongoose = require("mongoose");
 const Customer = require("../../../models/user.js");
+const prepareUserData = require("./prepareUserData.js");
 
-function createNewUser(userId) {
-  var customer = new Customer({ userId: userId });
+async function createNewUser(userId, userData) {
+ 
+  var data = await prepareUserData(userData);
 
-  customer
+
+  var customer = await new Customer({ userId: userId, ...data });
+
+  return customer
     .save()
     .then(() => {
-      console.log("Customer Created!");
+      return { ok: true };
     })
     .catch((error) => {
-      console.log("Failed Save");
-      console.log(error);
+      if (error.code === 11000) {
+        return {
+          ok: false,
+          message: "User Already Exists - User ID already in use.",
+        };
+      } else {
+        return { ok: false, message: "Failed To Create New User" };
+      }
     });
 }
 

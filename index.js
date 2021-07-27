@@ -48,6 +48,7 @@ mongoose
   .connect(MDBCONNECTURL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
+    useFindAndModify: false,
     useCreateIndex: true,
   })
   .then(function () {
