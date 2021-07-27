@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 
+import ProductOption from "./ProductOption.js"
 
 // Product  Schema
 const Product = mongoose.model('Product', {
@@ -7,11 +8,11 @@ const Product = mongoose.model('Product', {
         type: String,
         required:true
     },
-    prodName: {
+    productName: {
         type: String,
         required:true
     }, 
-    prodDescription: {
+    productDescription: {
         type:String,
         required:true
     },
@@ -20,14 +21,10 @@ const Product = mongoose.model('Product', {
         required:true
     },
     options: {
-        //import from seperate option schema 
-        type:String,
-        required:true
+        type:[ProductOption],
     },
     imagURLs: {
-        //from image collection
-        type:String,
-        required:true
+        type:[String],
     },
     showProduct: {
         type:Boolean,
@@ -50,8 +47,7 @@ const Product = mongoose.model('Product', {
         required:true
     },
     applicableTax: {
-        //from tax calculation schema??
-        type:String,
+        type:[String],
         required:true
     },
 });

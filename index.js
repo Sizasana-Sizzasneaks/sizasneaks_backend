@@ -12,9 +12,9 @@ const MDBCONNECTURL =
 const port = process.env.PORT || 5000;
 
 
-//Routes
-const productsRoutes = require("./routes/products/products");
-const specificProductRoutes = require("./routes/products/specificProduct")
+//Routesy
+const productsRoutes = require("./routes/products/products.js");
+const specificProductRoutes = require("./routes/products/specificProduct.js");
 
 //Connect Routers
 app.use("/products", productsRoutes);

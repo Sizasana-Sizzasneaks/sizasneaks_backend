@@ -2,7 +2,7 @@ const createError = require('http-errors');
 const mongoose = require('mongoose');
 
 
-const { Product } = require('../models/product');
+const { Product } = require('../../models/Product.js');
 
 const getSpecificProducts = async function (req, res, next) {
   console.log("Get All Products Controller");
