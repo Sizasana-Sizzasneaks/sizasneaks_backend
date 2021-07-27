@@ -4,4 +4,4 @@ const productOption = {
   quantity: Number,
 };
 
-mondule.exports = productOption;
+module.exports = productOption;
