@@ -36,12 +36,15 @@ const MDBCONNECTURL =
 const port = process.env.PORT || 5000;
 
 //Routes
-const productsRoutes = require("./routes/products.js");
+const productsRoutes = require("./routes/products/products.js");
+const specificProductRoutes = require("./routes/products/specificProduct.js");
 const userRoutes = require("./routes/user.js");
 
 //Connect Routers
 app.use("/products", productsRoutes);
+app.use("/product/:id", specificProductRoutes);
 app.use("/user", userRoutes);
+
 
 //Connect to MongoDB Server and Running Server.
 mongoose
