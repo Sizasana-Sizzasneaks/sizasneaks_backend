@@ -42,7 +42,7 @@ const userRoutes = require("./routes/user.js");
 
 //Connect Routers
 app.use("/products", productsRoutes);
-app.use("/product/:id", specificProductRoutes);
+app.use("/product", specificProductRoutes);
 app.use("/user", userRoutes);
 
 

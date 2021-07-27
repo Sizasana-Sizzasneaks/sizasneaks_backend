@@ -1,10 +1,12 @@
-const createError = require('http-errors');
-const mongoose = require('mongoose');
+const createError = require("http-errors");
+const mongoose = require("mongoose");
 
+const Admin = require("../../models/Admin.js");
 
-const { Product } = require('../../models/Product.js');
+const { Product } = require("../../models/Product.js");
 
 const getSpecificProducts = async function (req, res, next) {
+
   console.log("Get All Products Controller");
   const id = req.params.id;
   try {
@@ -22,4 +24,4 @@ const getSpecificProducts = async function (req, res, next) {
     next(error);
   }
 };
-  module.exports = getSpecificProducts;
+module.exports = getSpecificProducts;
