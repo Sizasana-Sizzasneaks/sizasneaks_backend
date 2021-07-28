@@ -1,55 +1,63 @@
 const mongoose = require("mongoose");
-
 const ProductOption = require("./ProductOption.js");
 
+const Schema = mongoose.Schema;
+
 // Product  Schema
-const Product = mongoose.model("Product", {
-  id: {
-    type: String,
-    required: true,
-  },
+const ProductSchema = new Schema({
+  
   productName: {
     type: String,
-    required: true,
+    required: true
   },
   productDescription: {
     type: String,
-    required: true,
+    required: true
   },
   brand: {
     type: String,
-    required: true,
+    required: true
+  },
+  categories: {
+    type: [String]
   },
   options: {
-    type: [ProductOption],
+    type: [ProductOption]
   },
   imagURLs: {
-    type: [String],
+    type: [String]
   },
   showProduct: {
     type: Boolean,
-    required: true,
+    required: true
   },
   supplierTaxAmount: {
     type: Number,
-    required: true,
+    required: true
   },
   supplierCost: {
     type: Number,
-    required: true,
+    required: true
   },
   sellingPriceTaxAmount: {
     type: Number,
-    required: true,
+    required: true
   },
   sellingPrice: {
     type: Number,
-    required: true,
+    required: true
   },
   applicableTax: {
     type: [String],
-    required: true,
+    required: true
   },
+
+  available: {
+    type: Boolean,
+    required: true
+  }
 });
 
-module.exports = { Product };
+const ProductModel = mongoose.model("products", ProductSchema)
+
+module.exports = ProductModel;

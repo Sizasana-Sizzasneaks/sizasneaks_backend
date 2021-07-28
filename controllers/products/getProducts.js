@@ -1,19 +1,22 @@
-const { Product } = require('../../models/Product.js');
+const retrieveProductsByCategory = require("./functions/retrieveProductsByCategory.js");
 
+var { STATUS_CODE } = require("../constants/httpConstants.js");
 
 const getProducts = async function (req, res, next) {
+  console.log("get Products");
+  var retrieveProductsResult = await retrieveProductsByCategory(
+    req.body.credential,
+    req.query
+  );
 
-  //console.log(req.body);
-  console.log(req.query);
+  if (retrieveProductsResult.ok === true) {
+    res.statusCode = STATUS_CODE.SUCCESS;
+    res.send(retrieveProductsResult);
+  } else {
+    res.status = STATUS_CODE.INTERNAL_SERVER_ERROR;
+    res.send(retrieveProductsResult);
+  }
 
-  // console.log("Get Products Controller");
-  // try {
-  //   const products = await Product.find({}, {__v: 0})
-  //   res.send(products);
-  // } catch (error) {
-  //   console.log(error.message);
-  // }
 };
-
 
 module.exports = getProducts;
