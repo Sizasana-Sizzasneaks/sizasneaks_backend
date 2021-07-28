@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const Customer = require("../../../models/user.js");
+const Customer = require("../../../models/Customer.js");
 const prepareUserData = require("./prepareUserData.js");
 
 async function updateUser(userId, userData) {
