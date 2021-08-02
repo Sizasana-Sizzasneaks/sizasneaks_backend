@@ -7,9 +7,16 @@ const verifyUserIdToken = require("../controllers/user/functions/verifyUserIdTok
 //Check Credential
 const checkCredential = require("../controllers/user/functions/checkCredential.js");
 
-//Get Products Controller & Route
+//Get Reviews Controller & Route
 const getReviews = require("../controllers/reviews/getReviews.js");
 router.get("/:product_id" , getReviews);
 
+//Create Reviews Controller & Route
+const createReview = require("../controllers/reviews/createReview.js");
+router.get("/" , createReview);
+
+//Delete Reviews Controller & Route
+const deleteReview = require("../controllers/reviews/deleteReview.js");
+router.get("/" , deleteReview);
 
 module.exports = router;

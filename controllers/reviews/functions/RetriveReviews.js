@@ -12,7 +12,7 @@ function retrieveReviews(product_id) {
    return Review.find({product_id: product_id},projection)
 
     .then((docs) => {
-      //console.log(docs);
+      
       if (docs.length !== 0) {
         return { ok: true, data: docs };
       } else {
