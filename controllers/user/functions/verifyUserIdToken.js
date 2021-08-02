@@ -1,22 +1,40 @@
-var admin = require("firebase-admin");
+const {
+  firebaseCustomerAccount,
+  firebaseAdminAccount,
+} = require("../../../config/firebaseConfig.js");
+
 var { STATUS_CODE } = require("../../constants/httpConstants.js");
 
 async function verifyUserIdToken(req, res, next) {
-  
   if (req.headers["authorization"]) {
     //Get Identity Token from Request
     var idToken = req.headers["authorization"]
       .replace("Bearer", "")
       .replace(" ", "");
 
-    var getIdFromTokenResult = await getIdFromToken(idToken);
+    var getIdFromTokenCustomerResult = await getIdFromToken(
+      firebaseCustomerAccount,
+      idToken
+    );
 
-    if (getIdFromTokenResult.ok === true) {
-      req.body.userId = getIdFromTokenResult.data;
+    if (getIdFromTokenCustomerResult.ok === true) {
+      req.body.userId = getIdFromTokenCustomerResult.data;
+      req.body.credential = "customer";
       next();
     } else {
-      res.statusCode = STATUS_CODE.UNAUTHORIZED;
-      res.send({ ok: false, error: "Invalid Token" });
+      var getIdFromTokenAdminResult = await getIdFromToken(
+        firebaseAdminAccount,
+        idToken
+      );
+
+      if (getIdFromTokenAdminResult.ok === true) {
+        req.body.userId = getIdFromTokenAdminResult.data;
+        req.body.credential = "administrator";
+        next();
+      } else {
+        res.statusCode = STATUS_CODE.UNAUTHORIZED;
+        res.send({ ok: false, error: "Invalid Token" });
+      }
     }
   } else {
     res.statusCode = STATUS_CODE.UNAUTHORIZED;
@@ -24,10 +42,10 @@ async function verifyUserIdToken(req, res, next) {
   }
 }
 
-async function getIdFromToken(idToken) {
+async function getIdFromToken(firebaseInstance, idToken) {
   var output;
 
-  await admin
+  await firebaseInstance
     .auth()
     .verifyIdToken(idToken)
     .then((decodedToken) => {

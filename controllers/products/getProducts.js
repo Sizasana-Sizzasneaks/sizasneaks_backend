@@ -8,6 +8,8 @@ const getProducts = async function (req, res, next) {
     req.body.credential,
     req.query
   );
+  console.log(req.body.credential);
+  console.log(req.body.userId);
 
   if (retrieveProductsResult.ok === true) {
     res.statusCode = STATUS_CODE.SUCCESS;
