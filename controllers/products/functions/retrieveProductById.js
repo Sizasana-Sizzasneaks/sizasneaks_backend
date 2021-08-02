@@ -12,7 +12,7 @@ async function retrieveProductById(userCredential, productId) {
       brand: 1,
       categories: 1,
       options: 1,
-      imgURLs: 1,
+      imgURls: 1,
       sellingPrice: 1,
     };
   }

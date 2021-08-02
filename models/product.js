@@ -24,7 +24,7 @@ const ProductSchema = new Schema({
   options: {
     type: [ProductOption]
   },
-  imagURLs: {
+  imgURls: {
     type: [String]
   },
   showProduct: {
