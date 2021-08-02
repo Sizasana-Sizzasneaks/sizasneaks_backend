@@ -7,12 +7,16 @@ const verifyUserIdToken = require("../controllers/user/functions/verifyUserIdTok
 //Check Credential
 //const checkCredential = require("../controllers/user/functions/checkCredential.js");
 
+
+//Handle Credential Claims
+const handleCredentialClaims = require("../controllers/user/functions/handleCredentialClaims.js");
+
 //Get Products Controller & Route
 const getProducts = require("../controllers/products/getProducts.js");
-router.get("/", verifyUserIdToken, getProducts);
+router.get("/",handleCredentialClaims, verifyUserIdToken, getProducts);
 
 //Get Specific Product
 const getProduct = require("../controllers/products/getProduct.js");
-router.get("/:productId", verifyUserIdToken, getProduct);
+router.get("/:productId", handleCredentialClaims,verifyUserIdToken, getProduct);
 
 module.exports = router;
