@@ -6,27 +6,14 @@ const {
 var { STATUS_CODE } = require("../../constants/httpConstants.js");
 
 async function verifyUserIdToken(req, res, next) {
-  if (req.headers["authorization"]) {
-    //Get Identity Token from Request
-    var idToken = req.headers["authorization"]
-      .replace("Bearer", "")
-      .replace(" ", "");
+  if (req.body.credentialClaims === "administrator") {
+    var getTokenFromHeaderResult = getTokenFromHeader(req);
 
-    var getIdFromTokenCustomerResult = await getIdFromToken(
-      firebaseCustomerAccount,
-      idToken
-    );
-
-    if (getIdFromTokenCustomerResult.ok === true) {
-      req.body.userId = getIdFromTokenCustomerResult.data;
-      req.body.credential = "customer";
-      next();
-    } else {
+    if (getTokenFromHeaderResult.ok === true) {
       var getIdFromTokenAdminResult = await getIdFromToken(
         firebaseAdminAccount,
-        idToken
+        getTokenFromHeaderResult.data
       );
-
       if (getIdFromTokenAdminResult.ok === true) {
         req.body.userId = getIdFromTokenAdminResult.data;
         req.body.credential = "administrator";
@@ -35,10 +22,47 @@ async function verifyUserIdToken(req, res, next) {
         res.statusCode = STATUS_CODE.UNAUTHORIZED;
         res.send({ ok: false, error: "Invalid Token" });
       }
+    } else {
+      res.statusCode = STATUS_CODE.UNAUTHORIZED;
+      res.send(getTokenFromHeaderResult);
+    }
+  } else if (req.body.credentialClaims === "customer") {
+    var getTokenFromHeaderResult = getTokenFromHeader(req);
+
+    if (getTokenFromHeaderResult.ok === true) {
+      var getIdFromTokenCustomerResult = await getIdFromToken(
+        firebaseCustomerAccount,
+        getTokenFromHeaderResult.data
+      );
+
+      if (getIdFromTokenCustomerResult.ok === true) {
+        req.body.userId = getIdFromTokenCustomerResult.data;
+        req.body.credential = "customer";
+        next();
+      } else {
+        res.statusCode = STATUS_CODE.UNAUTHORIZED;
+        res.send({ ok: false, error: "Invalid Token" });
+      }
+    } else {
+      res.statusCode = STATUS_CODE.UNAUTHORIZED;
+      res.send(getTokenFromHeaderResult);
     }
   } else {
-    res.statusCode = STATUS_CODE.UNAUTHORIZED;
-    res.send({ ok: false, error: "No User Authentication Header" });
+    req.body.credential = "unknown";
+    next();
+  }
+}
+
+function getTokenFromHeader(req) {
+  if (req.headers["authorization"]) {
+    //Get Identity Token from Request
+    var idToken = req.headers["authorization"]
+      .replace("Bearer", "")
+      .replace(" ", "");
+
+    return { ok: true, data: idToken };
+  } else {
+    return { ok: false, message: "No Authentication Header Supplied" };
   }
 }
 

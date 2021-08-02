@@ -4,6 +4,7 @@ var { STATUS_CODE } = require("../constants/httpConstants.js");
 
 const getProducts = async function (req, res, next) {
   console.log("get Products");
+
   var retrieveProductsResult = await retrieveProductsByCategory(
     req.body.credential,
     req.query
