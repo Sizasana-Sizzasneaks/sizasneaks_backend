@@ -12,7 +12,7 @@ const ReviewSchema = new Schema({
     type: String,
     required: true,
   },
-  product_Id: {
+  product_id: {
     type: String,
     required: true,
   },
@@ -25,11 +25,11 @@ const ReviewSchema = new Schema({
     required: true,
   },
   dateTime: {
-    type: Date,
+    type: String,
     required: true,
   },
 });
 
-const ReviewModel = mongoose.model("review", ReviewSchema);
+const ReviewModel = mongoose.model("reviews", ReviewSchema);
 
 module.exports = ReviewModel;

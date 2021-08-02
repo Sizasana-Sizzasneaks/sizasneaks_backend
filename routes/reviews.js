@@ -9,7 +9,7 @@ const checkCredential = require("../controllers/user/functions/checkCredential.j
 
 //Get Products Controller & Route
 const getReviews = require("../controllers/reviews/getReviews.js");
-router.get("/" , getReviews);
+router.get("/:product_id" , getReviews);
 
 
 module.exports = router;
