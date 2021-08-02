@@ -2,7 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
-var admin = require("firebase-admin");
+//var admin = require("firebase-admin");
 
 const app = express();
 
@@ -18,10 +18,18 @@ app.use(express.json());
 
 
 
-// Initialize Firebase Admin
-admin.initializeApp({
-  credential: admin.credential.applicationDefault(),
-});
+// // Initialize Firebase Admin
+
+
+// // Customer Platform
+
+
+// // Admin Platform
+
+
+// admin.initializeApp({
+//   credential: admin.credential.applicationDefault(),
+// });
 
 
 //MongoDB Database Connection URL
