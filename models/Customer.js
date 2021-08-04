@@ -9,6 +9,7 @@ const CustomerSchema = new Schema({
   lastName: String,
   mobileNumber: String,
   displayName: String,
+  isAnonymous: Boolean
   // shippingAddresses: [shippingAddress],
   // wishlist: [String],
   // cart: [ShoppingCartItem],
