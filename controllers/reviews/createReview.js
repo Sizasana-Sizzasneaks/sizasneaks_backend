@@ -1,4 +1,4 @@
-const createReview = require("./functions/createProductReview");
+const createProductReview = require("./functions/createProductReview");
 var { STATUS_CODE } = require("../constants/httpConstants.js");
 
 
