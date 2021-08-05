@@ -4,12 +4,13 @@ const Review = require("../../../models/Review.js");
 function retrieveReviews(product_id) {
   var projection = {
     customerFullName: 1,
+    customer_id:1,
     rating: 1,
     body: 1,
-    dateTime: 1,
+    createdAt: 1,
   };
 
-   return Review.find({product_id: product_id},projection)
+   return Review.find({product_id: product_id},projection).sort({createdAt:'descending'})
 
     .then((docs) => {
       
