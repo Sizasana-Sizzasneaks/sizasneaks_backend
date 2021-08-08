@@ -5,6 +5,7 @@ const cors = require("cors");
 
 const app = express();
 
+
 //Enabling Cors for all routes
 
 var corsOptions = {

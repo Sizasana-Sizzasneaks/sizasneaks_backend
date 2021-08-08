@@ -1,5 +1,4 @@
 function prepareUserData(data) {
-  console.log(data);
   var output = data;
   if (data.firstName && data.lastName) {
     var firstName =
