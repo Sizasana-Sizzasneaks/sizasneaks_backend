@@ -10,12 +10,10 @@ async function setUpTransporter() {
     port: 587,
     secureConnection: false,
     auth: {
-      user: testAccount.user,
-      pass: testAccount.pass,
+      user: process.env.NODEMAILER_TEST_USER,
+      pass: process.env.NODEMAILER_TEST_PASSWORD,
     },
-    tls:{
-        secureProtocol: "TLSv1_method"
-    }
+    
   });
 
 

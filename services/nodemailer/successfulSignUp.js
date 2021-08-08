@@ -2,7 +2,7 @@ const setUpTransporter = require("./index.js");
 
 function successfulSignUp(email) {
   const mailOptions = {
-    from: ' "Sizzasneaks 👟"  <no-reply.example.com>', // sender address
+    from: ' "Sizzasneaks 👟"  <ashton44@ethereal.email>', // sender address
     to: email, // list of receivers
     subject: "Succesfull Sign Up", // Subject line
     text: "Your account signup was successful. Welcome to the Sizzasneaks family, we hope you have a pleasant experience while shopping with us.", // plain text body
