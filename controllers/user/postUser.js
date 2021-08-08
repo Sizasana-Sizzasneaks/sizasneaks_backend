@@ -1,6 +1,7 @@
 var admin = require("firebase-admin");
 
 var createNewUser = require("../user/functions/createNewUser.js");
+var successfulSignUp = require("../../services/nodemailer/successfulSignUp.js");
 
 const postUser = async (req, res) => {
   console.log("Post User Controller");
@@ -12,6 +13,13 @@ const postUser = async (req, res) => {
 
       console.log(createNewUserResult);
       if (createNewUserResult.ok === true) {
+        if (typeof req.body.email !== "undefined") {
+          console.log("There is an email in body");
+          successfulSignUp(req.body.email);
+        } else {
+          console.log("No email in body");
+        }
+
         res.status = STATUS_CODE.SUCCESS;
         res.send({ ok: true });
       } else {
