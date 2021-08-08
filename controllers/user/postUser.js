@@ -1,6 +1,7 @@
 var admin = require("firebase-admin");
 
 var createNewUser = require("../user/functions/createNewUser.js");
+var {successfulSignUp} = require("../../services/emailing/emailing.js");
 
 const postUser = async (req, res) => {
   console.log("Post User Controller");
@@ -10,8 +11,13 @@ const postUser = async (req, res) => {
     if (req.body.credential === "customer") {
       var createNewUserResult = await createNewUser(req.body.userId, req.body);
 
-      console.log(createNewUserResult);
       if (createNewUserResult.ok === true) {
+        if (typeof req.body.email !== "undefined") {
+
+         // Sending Succesfull SigUp Email
+          successfulSignUp(req.body.email);
+        } 
+
         res.status = STATUS_CODE.SUCCESS;
         res.send({ ok: true });
       } else {

@@ -17,7 +17,7 @@ const getUser = async function (req, res) {
         }
       );
 
-      console.log(retrieveUserDetailsResult);
+     
       if (retrieveUserDetailsResult.ok === true) {
         res.statusCode = STATUS_CODE.SUCCESS;
         res.send(retrieveUserDetailsResult.data);
