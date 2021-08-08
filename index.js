@@ -2,7 +2,6 @@ require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
-//var admin = require("firebase-admin");
 
 const app = express();
 
@@ -16,21 +15,15 @@ var corsOptions = {
 app.use(cors(corsOptions));
 app.use(express.json());
 
-
-
 // // Initialize Firebase Admin
-
 
 // // Customer Platform
 
-
 // // Admin Platform
-
 
 // admin.initializeApp({
 //   credential: admin.credential.applicationDefault(),
 // });
-
 
 //MongoDB Database Connection URL
 const MDBCONNECTURL =
@@ -52,7 +45,6 @@ const userRoutes = require("./routes/user.js");
 app.use("/products", productsRoutes);
 app.use("/reviews", reviewsRoutes);
 app.use("/user", userRoutes);
-
 
 //Connect to MongoDB Server and Running Server.
 mongoose

@@ -1,11 +1,11 @@
 var nodemailer = require("nodemailer");
 
 async function setUpTransporter() {
-  var testAccount = await nodemailer.createTestAccount();
+ // var testAccount = await nodemailer.createTestAccount();
 
   // Set Up Nodemailer Transporter with Mailing Account Credentials
   var transporter = nodemailer.createTransport({
-    host: "smtp.ethereal.email",
+    host: "imap.ethereal.email",
     // service: "hotmail",
     port: 587,
     secureConnection: false,
@@ -13,9 +13,8 @@ async function setUpTransporter() {
       user: process.env.NODEMAILER_TEST_USER,
       pass: process.env.NODEMAILER_TEST_PASSWORD,
     },
-    
+   
   });
-
 
   return transporter;
 }
