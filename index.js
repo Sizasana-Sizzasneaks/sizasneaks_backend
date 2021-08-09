@@ -9,10 +9,10 @@ const app = express();
 
 var corsOptions = {
   origin: [
-    process.env.SIZZASNEAKS_CUSTOMER_FRONTEND_ONE,
-    process.env.SIZZASNEAKS_CUSTOMER_FRONTEND_TWO,
-    process.env.SIZZASNEAKS_ADMIN_FRONTEND_ONE,
-    process.env.SIZZASNEAKS_ADMIN_FRONTEND_TWO,
+    "https://sizasana-ecommerce-platform.web.app",
+    "https://sizasana-ecommerce-platform.firebaseapp.com",
+    "https://sizasana-ecommerce-admin.web.app",
+    "https://sizasana-ecommerce-admin.firebaseapp.com/",
   ],
   optionsSuccessStatus: 200, // For legacy browser support
 };
