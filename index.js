@@ -5,11 +5,15 @@ const cors = require("cors");
 
 const app = express();
 
-
 //Enabling Cors for all routes
 
 var corsOptions = {
-  origin: "*",
+  origin: [
+    process.env.SIZZASNEAKS_CUSTOMER_FRONTEND_ONE,
+    process.env.SIZZASNEAKS_CUSTOMER_FRONTEND_TWO,
+    process.env.SIZZASNEAKS_ADMIN_FRONTEND_ONE,
+    process.env.SIZZASNEAKS_ADMIN_FRONTEND_TWO,
+  ],
   optionsSuccessStatus: 200, // For legacy browser support
 };
 
