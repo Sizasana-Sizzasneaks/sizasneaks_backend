@@ -8,12 +8,7 @@ const app = express();
 //Enabling Cors for all routes
 
 var corsOptions = {
-  origin: [
-    "https://sizasana-ecommerce-platform.web.app",
-    "https://sizasana-ecommerce-platform.firebaseapp.com",
-    "https://sizasana-ecommerce-admin.web.app",
-    "https://sizasana-ecommerce-admin.firebaseapp.com",
-  ],
+  origin: "*",
   optionsSuccessStatus: 200, // For legacy browser support
 };
 
