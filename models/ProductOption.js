@@ -12,10 +12,14 @@ const variant = {
 };
 
 const productOption = {
-  color: String,
-  variants: [variant],
+  color: {
+    type: String,
+    required: true,
+  },
+  variants: {
+    type: [variant],
+    required: true,
+  },
 };
-
-
 
 module.exports = productOption;
