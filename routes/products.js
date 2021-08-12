@@ -19,4 +19,14 @@ router.get("/",handleCredentialClaims, verifyUserIdToken, getProducts);
 const getProduct = require("../controllers/products/getProduct.js");
 router.get("/:productId", handleCredentialClaims,verifyUserIdToken, getProduct);
 
+//Create product Controller & Route
+const postProduct = require("../controllers/products/postProduct.js");
+router.post(
+  "/:product_id",
+  handleCredentialClaims,
+  verifyUserIdToken,
+  postProduct
+);
+
+
 module.exports = router;
