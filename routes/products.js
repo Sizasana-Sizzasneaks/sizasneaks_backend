@@ -19,4 +19,5 @@ router.get("/",handleCredentialClaims, verifyUserIdToken, getProducts);
 const getProduct = require("../controllers/products/getProduct.js");
 router.get("/:productId", handleCredentialClaims,verifyUserIdToken, getProduct);
 
+
 module.exports = router;
