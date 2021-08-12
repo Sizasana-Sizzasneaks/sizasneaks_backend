@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
+const ShoppingCartItem=require("./ShoppingCartItem.js");
 
 const CustomerSchema = new Schema({
   userId: { type: String, unique: true },
@@ -9,10 +10,10 @@ const CustomerSchema = new Schema({
   lastName: String,
   mobileNumber: String,
   displayName: String,
-  isAnonymous: Boolean
+  isAnonymous: Boolean,
+  cart: [ShoppingCartItem]
   // shippingAddresses: [shippingAddress],
   // wishlist: [String],
-  // cart: [ShoppingCartItem],
 });
 
 const CustomerModel = mongoose.model("Customer", CustomerSchema);

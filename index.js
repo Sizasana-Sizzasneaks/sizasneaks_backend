@@ -40,11 +40,13 @@ const port = process.env.PORT || 5000;
 const productsRoutes = require("./routes/products.js");
 const reviewsRoutes = require("./routes/reviews.js");
 const userRoutes = require("./routes/user.js");
+const cartRoutes=require("./routes/cart.js");
 
 //Connect Routers
 app.use("/products", productsRoutes);
 app.use("/reviews", reviewsRoutes);
 app.use("/user", userRoutes);
+app.use("/cart", cartRoutes);
 
 //Connect to MongoDB Server and Running Server.
 mongoose
