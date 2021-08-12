@@ -9,10 +9,10 @@ const CustomerSchema = new Schema({
   lastName: String,
   mobileNumber: String,
   displayName: String,
-  isAnonymous: Boolean.apply,
+  isAnonymous: Boolean,
   // shippingAddresses: [shippingAddress],
   // wishlist: [String],
-  cart: [ShoppingCartItem],
+  cart: [ShoppingCartItem]
 });
 
 const CustomerModel = mongoose.model("Customer", CustomerSchema);

@@ -1,8 +1,12 @@
-const productOption = require("./ProductOption");
-
 const shoppingCartItem = {
     productId: String,
-    option: [productOption],
+    quantity:Number,
+    option: {
+        color: String,
+        size:Number,
+      },
+    imgURls:String,
+    sellingPrice: Number
   
 }
   

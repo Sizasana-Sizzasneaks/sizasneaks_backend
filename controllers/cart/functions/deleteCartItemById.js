@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const Customer = require("../../../models/customer.js");
+const Customer = require("../../../models/Customer.js");
 
 
 function daleteCartItem(productId) {
