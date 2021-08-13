@@ -32,4 +32,14 @@ router.put(
   putProduct
 );
 
+//Create product Controller & Route
+const postProduct = require("../controllers/products/postProduct.js");
+router.post(
+  "/",
+  handleCredentialClaims,
+  verifyUserIdToken,
+  postProduct
+);
+
+
 module.exports = router;

@@ -7,7 +7,19 @@ const getReviews = async function (req, res, next) {
 
   try {
     if (typeof req.params.product_id !== "undefined") {
-      var reviewsResult = await retrieveReviews(req.params.product_id);
+      var projection = {
+        customerFullName: 1,
+        customer_id: 1,
+        rating: 1,
+        body: 1,
+        createdAt: 1,
+      };
+
+      if (req.body.credential === "administrator") {
+        projection = {...projection ,replies: 1 };
+      }
+
+      var reviewsResult = await retrieveReviews(req.params.product_id, projection);
 
       if (reviewsResult.ok === true) {
         // Prepare Review Data
