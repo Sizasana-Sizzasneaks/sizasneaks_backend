@@ -22,7 +22,7 @@ router.get("/:productId", handleCredentialClaims,verifyUserIdToken, getProduct);
 //Create product Controller & Route
 const postProduct = require("../controllers/products/postProduct.js");
 router.post(
-  "/:product_id",
+  "/",
   handleCredentialClaims,
   verifyUserIdToken,
   postProduct
