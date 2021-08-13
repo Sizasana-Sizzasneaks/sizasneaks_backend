@@ -57,13 +57,13 @@ async function postReviewReply(req, res, next) {
                 if (sendReviewReply.ok === true) {
                   res.status = STATUS_CODE.SUCCESS;
                   res.send(sendReviewReply);
-                  console.log(sendReviewReply);
+                  
                 } else {
                   res.status = STATUS_CODE.INTERNAL_SERVER_ERROR;
                   res.send(sendReviewReply);
                 }
 
-                console.log(emailContent);
+                
               } else {
                 res.status = STATUS_CODE.INTERNAL_SERVER_ERROR;
                 res.send(getProductResult);
