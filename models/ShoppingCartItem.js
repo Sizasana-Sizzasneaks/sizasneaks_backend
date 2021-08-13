@@ -2,12 +2,12 @@ const shoppingCartItem = {
     product_id: String,
     quantity: Number,
 
-    Option: {
+    option: {
         color:String,
         size: Number,
     },
     imgURLs: String,
-    price: Number
+    sellingPrice: Number
 }
 
 module.exports = shoppingCartItem;
