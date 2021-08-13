@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const ShoppingCartItem = require("../models/ShoppingCartItem");
+const ShoppingCartItem = require("../../models/Customer.js");
 module.exports =function postCart(){
 
     this.item= [ShoppingCartItem];
