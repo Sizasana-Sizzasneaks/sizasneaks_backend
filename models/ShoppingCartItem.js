@@ -5,9 +5,7 @@ const shoppingCartItem = {
     option: {
         color:String,
         size: Number,
-    },
-    imgURLs: String,
-    sellingPrice: Number
+    }
 }
 
 module.exports = shoppingCartItem;

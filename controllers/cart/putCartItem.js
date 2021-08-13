@@ -1,26 +1,26 @@
 const createCartItem = require("./functions/createCartItem.js");
 
 //postCartItem functionality
-const addToCart = async function (req, res) {
-  console.log("Create product");
+const putCartItem = async function (req, res) {
+  console.log("Put Cart Item");
 
   try {
-    if (typeof req.params.product_id != "undefined") {
+    if (typeof req.body.product_id !== "undefined"&& typeof req.body.variant !== "undefined" ) {
       if (req.body.credential === "customer") {
         console.log(req.body);
-        var createProductResult = await createCartItem(
+        var createCartItemResult= await createCartItem(
           req.body.userId,
-          req.params.product_id,
-          req.body
+          req.body.product_id,
+          req.body.variant
         );
 
-        console.log(createProductResult);
-        if (createProductResult.ok === true) {
+        console.log(createCartItemResult);
+        if (createCartItemResult.ok === true) {
           res.status = STATUS_CODE.SUCCESS;
-          res.send(createProductResult);
+          res.send(createCartItemResult);
         } else {
           res.status = STATUS_CODE.UNAUTHORIZED;
-          res.send(createProductResult);
+          res.send(createCartItemResult);
         }
       } else {
         res.status = STATUS_CODE.UNAUTHORIZED;
@@ -33,7 +33,7 @@ const addToCart = async function (req, res) {
       res.status = STATUS_CODE.UNAUTHORIZED;
       res.send({
         ok: false,
-        error: "Product Id not supplied",
+        error: "Insufficient Data Supplied",
       });
     }
   } catch {
@@ -41,4 +41,4 @@ const addToCart = async function (req, res) {
     res.send({ ok: false, error: "Unkown Server Error" });
   }
 };
-module.exports = addToCart;
+module.exports = putCartItem;

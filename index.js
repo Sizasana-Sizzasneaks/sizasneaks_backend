@@ -2,7 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
-const session = require('express-session')
+//const session = require('express-session')
 
 const app = express();
 
@@ -58,7 +58,7 @@ const cartRoutes = require("./routes/cart.js");
 app.use("/products", productsRoutes);
 app.use("/reviews", reviewsRoutes);
 app.use("/user", userRoutes);
-app.use("cart", cartRoutes);
+app.use("/cart", cartRoutes);
 
 
 //Connect to MongoDB Server and Running Server.
