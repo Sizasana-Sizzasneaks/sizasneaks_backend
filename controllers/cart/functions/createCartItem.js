@@ -1,14 +1,9 @@
 const mongoose = require("mongoose");
-const retrieveUserDetails = require("../../controllers/user/functions/retrieveUserDetails");
+const retrieveUserDetails = require("../../user/functions/retrieveUserDetails.js");
 const Customer = require("../../../models/Customer.js");
-async function createProductbyid(
-  userId,
-  product_id,
-  totalQ,
-  option,
-  imageURls,
-  sellingPrice
-) {
+
+
+async function createCartItem( userId, product_id, totalQ, option, imageURls, sellingPrice) {
   console.log("add to cart");
 
   if (
@@ -29,11 +24,11 @@ async function createProductbyid(
 
       if (retrieveUserDetailsResult.data.isAnonymous === false) {
         var shoppingCartItem = {
-          product_id: product_id,
-          quantity: totalQ.quantity,
-          option: option,
-          imageURls: imageURls,
-          sellingPrice: sellingPrice,
+          product_id: "6101340adc7a0305bc700015",
+          quantity: 3,
+          option: {color:"Red", size:7},
+          imageURls: "https://firebasestorage.googleapis.com/v0/b/sizasana-ecommerce-platfor...",
+          sellingPrice: 5599,
         };
 
         Customer.findOneAndUpdate(
@@ -93,4 +88,4 @@ async function createProductbyid(
   }
 }
 
-module.exports = createProductbyid;
+module.exports = createCartItem;

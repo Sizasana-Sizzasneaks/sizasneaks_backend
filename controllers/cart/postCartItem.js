@@ -1,4 +1,4 @@
-const createProductbyid = require("./functions/createCartItem.js");
+const createCartItem = require("./functions/createCartItem.js");
 
 //postCartItem functionality
 const addToCart = async function (req, res) {
@@ -8,7 +8,7 @@ const addToCart = async function (req, res) {
     if (typeof req.params.product_id != "undefined") {
       if (req.body.credential === "customer") {
         console.log(req.body);
-        var createProductResult = await createProductbyid(
+        var createProductResult = await createCartItem(
           req.body.userId,
           req.params.product_id,
           req.body

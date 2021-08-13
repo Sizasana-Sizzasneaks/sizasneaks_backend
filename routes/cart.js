@@ -10,12 +10,7 @@ const verifyUserIdToken = require("../controllers/user/functions/verifyUserIdTok
 const handleCredentialClaims = require("../controllers/user/functions/handleCredentialClaims.js");
 
 //Add product to Cart
-const postToCart = require("../controllers/cart/postCartItem");
-router.post(
-  "/:userId",
-  handleCredentialClaims,
-  verifyUserIdToken, 
-   postToCart 
-);
+const postToCart = require("../controllers/cart/postCartItem.js");
+router.post("/:userId",postToCart );
 
 module.exports = router;
