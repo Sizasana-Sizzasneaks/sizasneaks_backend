@@ -8,11 +8,11 @@ const verifyUserIdToken = require("../controllers/user/functions/verifyUserIdTok
 const handleCredentialClaims = require("../controllers/user/functions/handleCredentialClaims.js");
 
 //get User Cart
-const getCart=require("../controllers/cart/getCart.js");
-router.get("/", verifyUserIdToken,handleCredentialClaims, getCart);
+const getCart = require("../controllers/cart/getCart.js");
+router.get("/", handleCredentialClaims, verifyUserIdToken, getCart);
 
 //put User Cart
-const putCart=require("../controllers/cart/putCart.js");
+const putCart = require("../controllers/cart/putCart.js");
 // router.put("/:userId", verifyUserIdToken,handleCredentialClaims, putCart);
 
-module.exports=router;
+module.exports = router;

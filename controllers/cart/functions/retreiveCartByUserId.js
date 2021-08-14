@@ -1,16 +1,16 @@
 const retrieveUserDetails= require("../../user/functions/retrieveUserDetails");
-const availableProduct=require("./functions/availabilityProduct.js");
+// const availableProduct=require("./functions/availabilityProduct.js");
 
 // receieves user id and returns corresponding users cart
-async function retrieveCartByUserId(userID){
+async function retrieveCartByUserId(userId){
     try {
-        if (typeof userID !== "undefined") {
+        if (typeof userId !== "undefined") {
            var retrieveUserDetailsResult= await retrieveUserDetails(userId,{
-               cart:1
+               cart:1,
+               _id:0
            });
            if(retrieveUserDetailsResult.ok=== true){
-             console.log(retrieveUserDetailsResult.data);
-             return { ok: true, data: retrieveUserDetailsResult.data  };
+             return { ok: true, data: retrieveUserDetailsResult.data.cart  };
            }else
            {
                return retrieveUserDetailsResult;
@@ -25,4 +25,4 @@ async function retrieveCartByUserId(userID){
 
 }
 
-module.exports = retrieveCartByUserUserId
+module.exports = retrieveCartByUserId
