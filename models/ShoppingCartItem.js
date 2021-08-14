@@ -1,3 +1,4 @@
+
 const shoppingCartItem = {
     product_id: String,
     quantity: Number,
