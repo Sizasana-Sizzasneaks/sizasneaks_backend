@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const ShoppingCartItem = require("./ShoppingCartItem");
 
 const Schema = mongoose.Schema;
 const ShoppingCartItem=require("./ShoppingCartItem.js");
