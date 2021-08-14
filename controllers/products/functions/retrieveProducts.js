@@ -18,6 +18,7 @@ function retrieveProducts(search, projection) {
       ) {
         return { ok: false, message: "Invalid Product Id" };
       } else {
+        console.log(error);
         return { ok: false, message: "Error When Getting Products" };
       }
     });

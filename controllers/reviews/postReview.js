@@ -1,4 +1,5 @@
 const createProductReview = require("./functions/createProductReview.js");
+var { STATUS_CODE } = require("../constants/httpConstants.js");
 
 const postReview = async function (req, res) {
   console.log("Create Review Controller");
@@ -17,18 +18,25 @@ const postReview = async function (req, res) {
         if (createNewReviewResult.ok === true) {
           res.status = STATUS_CODE.SUCCESS;
           res.send(createNewReviewResult);
-        } else {
+        }
+        
+        else {
           res.status = STATUS_CODE.UNAUTHORIZED;
           res.send(createNewReviewResult);
         }
-      } else {
+      } 
+      
+      else {
         res.status = STATUS_CODE.UNAUTHORIZED;
         res.send({
           ok: false,
           error: "Insufficient Credentials",
         });
       }
-    } else {
+      
+    }
+    
+    else {
       res.status = STATUS_CODE.UNAUTHORIZED;
       res.send({
         ok: false,

@@ -45,7 +45,10 @@ async function createProductReview(userId, productId, reviewData) {
       } else {
         return{ok: false, message: "Guest users cannot review products"};
       }
-    } else {
+    } 
+    //end of if
+    
+    else {
       return { ok: false, message: "Failed to Retrieve Customer details" };
     }
   } else {

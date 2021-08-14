@@ -1,32 +1,36 @@
 const mongoose = require("mongoose");
-
 const Schema = mongoose.Schema;
+const ReviewReply = require("./ReviewReply.js");
 
-const ReviewSchema = new Schema({
+const ReviewSchema = new Schema(
+  {
+    customer_id: {
+      type: String,
+      required: true,
+    },
+    customerFullName: {
+      type: String,
+      required: true,
+    },
+    product_id: {
+      type: String,
+      required: true,
+    },
+    rating: {
+      type: Number,
+      required: true,
+    },
+    body: {
+      type: String,
+      required: true,
+    },
 
-  customer_id: {
-    type: String,
-    required: true,
+    replies: {
+      type: [ReviewReply],
+    },
   },
-  customerFullName: {
-    type: String,
-    required: true,
-  },
-  product_id: {
-    type: String,
-    required: true,
-  },
-  rating: {
-    type: Number,
-    required: true,
-  },
-  body: {
-    type: String,
-    required: true,
-  }
-  
-}, {timestamps: { createdAt: 'createdAt' } });
-
+  { timestamps: { createdAt: "createdAt" } }
+);
 
 const ReviewModel = mongoose.model("reviews", ReviewSchema);
 

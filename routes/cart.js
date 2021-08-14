@@ -15,4 +15,9 @@ router.get("/", handleCredentialClaims, verifyUserIdToken, getCart);
 const putCart = require("../controllers/cart/putCart.js");
 // router.put("/:userId", verifyUserIdToken,handleCredentialClaims, putCart);
 
+//Add product to Cart
+const postToCart = require("../controllers/cart/putCartItem.js");
+router.put("/",handleCredentialClaims, verifyUserIdToken, postToCart );
+
 module.exports = router;
+
