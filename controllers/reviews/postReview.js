@@ -18,18 +18,25 @@ const postReview = async function (req, res) {
         if (createNewReviewResult.ok === true) {
           res.status = STATUS_CODE.SUCCESS;
           res.send(createNewReviewResult);
-        } else {
+        }
+        
+        else {
           res.status = STATUS_CODE.UNAUTHORIZED;
           res.send(createNewReviewResult);
         }
-      } else {
+      } 
+      
+      else {
         res.status = STATUS_CODE.UNAUTHORIZED;
         res.send({
           ok: false,
           error: "Insufficient Credentials",
         });
       }
-    } else {
+      
+    }
+    
+    else {
       res.status = STATUS_CODE.UNAUTHORIZED;
       res.send({
         ok: false,

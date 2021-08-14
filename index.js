@@ -2,6 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
+//const session = require('express-session')
 
 const app = express();
 
@@ -11,6 +12,17 @@ var corsOptions = {
   origin: "*",
   optionsSuccessStatus: 200, // For legacy browser support
 };
+
+//Creating store
+// var MongoStore = require('connect-mongo')(session);
+
+// app.use(session({
+//   secret: 'mysecret',
+//   resave: false,
+//   saveUninitialized: false,
+//   store: new MongoStore({mongooseConnection: mongoose.connection}),
+//   cookie: {maxAge: 180 * 60 * 1000}
+// }))
 
 app.use(cors(corsOptions));
 app.use(express.json());
@@ -40,11 +52,14 @@ const port = process.env.PORT || 5000;
 const productsRoutes = require("./routes/products.js");
 const reviewsRoutes = require("./routes/reviews.js");
 const userRoutes = require("./routes/user.js");
+const cartRoutes = require("./routes/cart.js");
 
 //Connect Routers
 app.use("/products", productsRoutes);
 app.use("/reviews", reviewsRoutes);
 app.use("/user", userRoutes);
+app.use("/cart", cartRoutes);
+
 
 //Connect to MongoDB Server and Running Server.
 mongoose
