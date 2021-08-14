@@ -7,6 +7,7 @@ const retrieveProductById = require("./functions/retrieveProductById.js");
 
 const getProduct = async function (req, res, next) {
   try {
+    console.log("get Product");
     if (typeof req.params.productId !== "undefined") {
       var retrieveProductByIdResult = await retrieveProductById(
         req.body.credential,

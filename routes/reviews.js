@@ -27,6 +27,21 @@ router.post(
 
 //Delete Reviews Controller & Route
 const deleteReview = require("../controllers/reviews/deleteReview.js");
-router.delete("/:review_id", handleCredentialClaims, verifyUserIdToken, deleteReview);
+router.delete(
+  "/:review_id",
+  handleCredentialClaims,
+  verifyUserIdToken,
+  deleteReview
+);
+
+//Admin Reply to Reviews
+const postReviewReply = require("../controllers/reviews/postReviewReply.js");
+
+router.post(
+  "/reply/:review_id",
+  handleCredentialClaims,
+  verifyUserIdToken,
+  postReviewReply
+);
 
 module.exports = router;

@@ -1,4 +1,5 @@
 const createProductReview = require("./functions/createProductReview.js");
+var { STATUS_CODE } = require("../constants/httpConstants.js");
 
 const postReview = async function (req, res) {
   console.log("Create Review Controller");
