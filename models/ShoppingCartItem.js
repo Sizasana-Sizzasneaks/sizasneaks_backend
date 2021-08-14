@@ -5,8 +5,6 @@ const ShoppingCartItem={
         color:String,
         size: Number,
     },
-    imgURls: String,
-    sellingPrice:Number
 }
 
 module.exports = ShoppingCartItem;
