@@ -1,8 +1,9 @@
+var { STATUS_CODE } = require("../constants/httpConstants.js");
 const createCartItem = require("./functions/createCartItem.js");
 
 //postCartItem functionality
-const putCartItem = async function (req, res) {
-  console.log("Put Cart Item");
+const postCartItem = async function (req, res) {
+  console.log("Post Cart Item");
 
   try {
     if (typeof req.body.product_id !== "undefined"&& typeof req.body.variant !== "undefined" ) {
@@ -41,4 +42,4 @@ const putCartItem = async function (req, res) {
     res.send({ ok: false, error: "Unkown Server Error" });
   }
 };
-module.exports = putCartItem;
+module.exports = postCartItem;
