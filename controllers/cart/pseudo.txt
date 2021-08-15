@@ -1,6 +1,0 @@
-get token
-get customer cart --- schema cart field
-check if the products in the customer cart are available 
-retrieve the product name, selling price and image --- since they are not among the cart field
-summary calculation tings 
-display all product item from the cart cust mong to front end 
