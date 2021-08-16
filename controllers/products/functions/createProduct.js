@@ -1,23 +1,21 @@
-const mongoose = require("mongoose");
-const Product = require("../../../models/product.js");
-const retrieveProducts = require("./retrieveProducts.js");
+const Product = require("../../../models/product.js"); 
 
 async function createProduct(product) {
-  console.log("create product here");
+  //Checks that all function arguments are not undefined before execution.
   if (typeof product !== "undefined") {
-    var product = new Product(product);
+    var product = new Product(product); //Creates a product object from the supplied argument.
 
     return product
-      .save()
+      .save() //Saves this new product object to persistent storage.
       .then(() => {
-        return { ok: true, message: "product created" };
+        return { ok: true, message: "product created" }; //Returns successful object and message when saving of a new product completes correctly.
       })
       .catch((error) => {
         console.log(error);
-        return { ok: false, message: "Failed To Create New product" };
+        return { ok: false, message: "Failed To Create New product" }; //Returns unsuccessful object and message when saving of new product/inventory item fails.
       });
   } else {
-    return { ok: false, message: "Product is undefined" };
+    return { ok: false, message: "Product is undefined" }; //Returns unsuccessful object and message when product argument is not defined.
   }
 }
 
