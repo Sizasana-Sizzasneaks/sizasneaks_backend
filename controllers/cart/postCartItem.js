@@ -6,16 +6,21 @@ const postCartItem = async function (req, res) {
   console.log("Post Cart Item");
 
   try {
-    if (typeof req.body.product_id !== "undefined"&& typeof req.body.variant !== "undefined" ) {
+    // check argument are not undefined
+    if (typeof req.body.product_id !== "undefined"&& 
+          typeof req.body.variant !== "undefined" ) {
+
       if (req.body.credential === "customer") {
         console.log(req.body);
+
+        //passing the arguments that make up shopping cart model
         var createCartItemResult= await createCartItem(
           req.body.userId,
           req.body.product_id,
           req.body.variant
         );
-
-        console.log(createCartItemResult);
+        //depending on the function return value 
+        //send a successful or error message
         if (createCartItemResult.ok === true) {
           res.status = STATUS_CODE.SUCCESS;
           res.send(createCartItemResult);
@@ -39,7 +44,7 @@ const postCartItem = async function (req, res) {
     }
   } catch {
     res.status = STATUS_CODE.INTERNAL_SERVER_ERROR;
-    res.send({ ok: false, error: "Unkown Server Error" });
+    res.send({ ok: false, error: "Unknown Server Error" });
   }
 };
 module.exports = postCartItem;

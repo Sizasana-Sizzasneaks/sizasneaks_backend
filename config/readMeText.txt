@@ -1,0 +1,1 @@
+This folder "config\firebaseConfig.js" contains the credentials configuration to the firebase 
