@@ -2,18 +2,16 @@ const Customer = require("../../../models/Customer.js");
 
 //This function Performs the act of updating the quantity of a cart item within
 //a user's shopping cart.
-function updateCartItemQuantity(userId, product_id, option, newQuanity) {
+function updateCartItemQuantity(userId, cartItem_id, newQuanity) {
   if (
     typeof userId !== "undefined" &&
-    typeof product_id !== "undefined" &&
-    typeof option !== "undefined" &&
+    typeof cartItem_id !== "undefined" &&
     typeof newQuanity !== "undefined"
   ) {
     return Customer.updateOne(
       {
         userId: userId,
-        "cart.product_id": product_id,
-        "cart.option": option,
+        "cart._id": cartItem_id,
       },
       {
         $set: {
@@ -30,7 +28,7 @@ function updateCartItemQuantity(userId, product_id, option, newQuanity) {
         return { ok: false, message: "Quantity Change Failed" };
       });
   } else {
-    return { ok: false, message: "Not all agruments were supplied." };
+    return { ok: false, message: "Not all arguments were supplied." };
   }
 }
 
