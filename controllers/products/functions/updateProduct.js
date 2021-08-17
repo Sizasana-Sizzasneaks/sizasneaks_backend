@@ -9,7 +9,7 @@ async function updateProduct(productId, productData) {
       typeof productData !== "undefined" &&
       productData instanceof Object
     ) {
-      return Product.updateOne({ _id: productId }, productData) //Performs the update of the
+      return Product.updateOne({ _id: productId }, productData) //Performs the update using the Mongoose API
         .then(() => {
           return { ok: true, message: "fields Updated." }; //Returning when the update of a product is successful.
         })
@@ -20,7 +20,7 @@ async function updateProduct(productId, productData) {
             error instanceof mongoose.CastError &&
             error.kind === "ObjectId"
           ) {
-            return { ok: false, message: "Invalid Product Id" }; //Returning when the supplied search object contains an invalid product id value (invalid format).
+            return { ok: false, message: "Invalid Product ID" }; //Returning when the supplied search object contains an invalid product id value (invalid format).
           } else {
             return {
               //Return a general error when the retrieving of products is unsuccessful.
@@ -32,7 +32,7 @@ async function updateProduct(productId, productData) {
         });
     } else {
       return {
-        //Returns unsuccessful object and message when productId and productData argument are not defined.
+        //Returns unsuccessful object and message when productId and/or productData arguments are not defined.
         ok: false,
         message: "Update Product Requires both a product id and product data",
       };

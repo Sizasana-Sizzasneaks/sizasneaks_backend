@@ -10,8 +10,7 @@ async function createProduct(product) {
       .then(() => {
         return { ok: true, message: "product created" }; //Returns successful object and message when saving of a new product completes correctly.
       })
-      .catch((error) => {
-        console.log(error);
+      .catch(() => {
         return { ok: false, message: "Failed To Create New product" }; //Returns unsuccessful object and message when saving of new product/inventory item fails.
       });
   } else {

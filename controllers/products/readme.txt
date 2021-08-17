@@ -1,5 +1,7 @@
 This folder "controllers\products" holds all the express middleware functions associated with product/inventory manipulation.
 
+Information pertaining to the https routes that invoke the middleware functions bellow can be found at "routes\products.js"
+
 Arguments
 - All Functions receive the following functions
 1. req (object) - This is a http(s) request object that contains details of the request that has invoked the execution of a function.
@@ -10,19 +12,27 @@ Functions
 ---------------------------------------------------------------------------------------------
 getProduct.js
 
-
-
-
-
+This middleware function performs the act of retrieving a single product/inventory item. 
+The specific fields of product that are returned depends on the credential type of the client that has invoked this function. 
 
 ---------------------------------------------------------------------------------------------
-controllers\products\getProducts.js
+getProducts.js
 
-
-
+This middleware function performs the act of retrieving  product/inventory item's from the product collection.  
+The specific fields of product that are returned depends on the credential type of the client that has invoked this function. 
+The collection of documents returned by this function is based on the search criteria supplied within the 
+route, and query parameters of the request object it receives upon invocation. 
 
 ---------------------------------------------------------------------------------------------
-controllers\products\postProduct.js
+postProduct.js
+
+This middleware function performs the act of creating a new product/inventory item.  
+This function only executes successfully when supplied a credential type of "administrator".
+All details of the new product are supplied within the body of the request object that invokes this function.
 
 ---------------------------------------------------------------------------------------------
-controllers\products\putProduct.js
+putProduct.js
+
+This middleware function performs the act of updating a specific product/inventory item.  
+This function only executes successfully when supplied a credential type of "administrator".
+All details of the product that must be updated are supplied within the body of the request object that invokes this function.
