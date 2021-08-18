@@ -2,7 +2,7 @@ var express = require("express");
 const router = express.Router();
 
 //Helper Functions
-
+ 
 //Verify User ID
 const verifyUserIdToken = require("../controllers/user/functions/verifyUserIdToken.js");
 

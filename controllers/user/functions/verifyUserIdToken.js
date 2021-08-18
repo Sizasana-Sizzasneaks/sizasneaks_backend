@@ -6,9 +6,11 @@ const {
 var { STATUS_CODE } = require("../../constants/httpConstants.js");
 
 async function verifyUserIdToken(req, res, next) {
+  // check if user is an administrator
   if (req.body.credentialClaims === "administrator") {
-    var getTokenFromHeaderResult = getTokenFromHeader(req);
 
+    // retrieve token from the http request header  
+    var getTokenFromHeaderResult = getTokenFromHeader(req);
     if (getTokenFromHeaderResult.ok === true) {
       var getIdFromTokenAdminResult = await getIdFromToken(
         firebaseAdminAccount,
@@ -26,9 +28,9 @@ async function verifyUserIdToken(req, res, next) {
       res.statusCode = STATUS_CODE.UNAUTHORIZED;
       res.send(getTokenFromHeaderResult);
     }
+    // check if its a customer  
   } else if (req.body.credentialClaims === "customer") {
     var getTokenFromHeaderResult = getTokenFromHeader(req);
-
     if (getTokenFromHeaderResult.ok === true) {
       var getIdFromTokenCustomerResult = await getIdFromToken(
         firebaseCustomerAccount,
@@ -48,24 +50,24 @@ async function verifyUserIdToken(req, res, next) {
       res.send(getTokenFromHeaderResult);
     }
   } else {
+  // user is not a customer nor an admin could be an intercepted attacker 
     req.body.credential = "unknown";
     next();
   }
 }
-
+// using the frontend http request header to gain the token
 function getTokenFromHeader(req) {
   if (req.headers["authorization"]) {
     //Get Identity Token from Request
     var idToken = req.headers["authorization"]
       .replace("Bearer", "")
       .replace(" ", "");
-
     return { ok: true, data: idToken };
   } else {
     return { ok: false, message: "No Authentication Header Supplied" };
   }
 }
-
+// using the token to get the userId
 async function getIdFromToken(firebaseInstance, idToken) {
   var output;
 

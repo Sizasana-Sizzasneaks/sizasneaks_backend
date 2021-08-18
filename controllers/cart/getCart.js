@@ -14,34 +14,39 @@ const getCart = async function (req, res, next) {
       req.body.userId
     );
     if (retrieveCartByUserIdResult.ok === true) {
+      
       // prepare cart data
-
       var prepareCartDataResult = await prepareCartData(
         retrieveCartByUserIdResult.data
       );
+      // get cart summary calculation details 
       if (prepareCartDataResult.ok === true) {
         var calculateCartSummaryResult = await calculateCartSummary(
           prepareCartDataResult.data
         );
+        //send back the cart or error message 
         if (calculateCartSummaryResult.ok === true) {
           res.status = STATUS_CODE.SUCCESS;
           res.send({ ok: true, data: calculateCartSummaryResult.data });
-        } else {
+        } 
+        else {
           res.status = STATUS_CODE.INTERNAL_SERVER_ERROR;
           res.send(calculateCartSummaryResult);
         }
-      } else {
+      } // send back error message if prepare cart was not a success
+      else {
         res.status = STATUS_CODE.INTERNAL_SERVER_ERROR;
         res.send(prepareCartDataResult);
       }
-    } else {
+    } // if retrieving users id fails send error
+    else {
       res.status = STATUS_CODE.INTERNAL_SERVER_ERROR;
       res.send(retrieveCartByUserIdResult);
     }
   } catch (error) {
     console.log(error);
     res.status = STATUS_CODE.INTERNAL_SERVER_ERROR;
-    res.send({ ok: false, error: "Unkown Server Error" });
+    res.send({ ok: false, error: "Unknown Server Error" });
   }
 };
 

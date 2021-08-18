@@ -2,19 +2,24 @@ const Admin = require("../../../models/Admin.js");
 const Customer = require("../../../models/Customer.js");
 
 async function checkCredential(req, res, next) {
+  // 
   var userId = await req.body.userId;
-  await console.log(userId);
-
+  //await console.log(userId);
+  
+  //first check the given userId is of admin
   var isAdminResult = await isAdmin(userId);
 
   if (isAdminResult.ok === true) {
+    //provide the credential field a value
     req.body.credential = "administrator";
     next();
   } else {
     if (isAdminResult.message === "Not admin") {
+      //else check the given userId is of customer
       var isCustomerResult = await isCustomer(userId);
 
       if (isCustomerResult.ok === true) {
+        //provide the credential field a value
         req.body.credential = "customer";
         next();
       } else {
@@ -33,7 +38,9 @@ async function checkCredential(req, res, next) {
   }
 }
 
+//below function returns an object of boolean and a message
 async function isAdmin(userId) {
+  //using Mongoose API to search through the database
   return Admin.find({ userId: userId }, { _id: 1, userId: 1 })
     .then((docs) => {
         
@@ -49,7 +56,9 @@ async function isAdmin(userId) {
     });
 }
 
+//below function returns an object of boolean and a message
 async function isCustomer(userId) {
+  //using Mongoose API to search through the database
   return Customer.find(
     { userId: userId },
     {
