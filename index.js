@@ -2,40 +2,17 @@ require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
-//const session = require('express-session')
 
 const app = express();
 
 //Enabling Cors for all routes
-
 var corsOptions = {
   origin: "*",
   optionsSuccessStatus: 200, // For legacy browser support
 };
 
-//Creating store
-// var MongoStore = require('connect-mongo')(session);
-
-// app.use(session({
-//   secret: 'mysecret',
-//   resave: false,
-//   saveUninitialized: false,
-//   store: new MongoStore({mongooseConnection: mongoose.connection}),
-//   cookie: {maxAge: 180 * 60 * 1000}
-// }))
-
 app.use(cors(corsOptions));
 app.use(express.json());
-
-// // Initialize Firebase Admin
-
-// // Customer Platform
-
-// // Admin Platform
-
-// admin.initializeApp({
-//   credential: admin.credential.applicationDefault(),
-// });
 
 //MongoDB Database Connection URL
 const MDBCONNECTURL =
@@ -45,23 +22,22 @@ const MDBCONNECTURL =
   process.env.MONGODB_CONNECT_PASSWORD +
   "@sizasana-sizzasneaks.wnfwn.mongodb.net/sizasana-sizzasneaks?retryWrites=true&w=majority";
 
-//Server Port Number.
+//Setting a Server Port Number.
 const port = process.env.PORT || 5000;
 
-//Routes
+//Importing clusters of routers
 const productsRoutes = require("./routes/products.js");
 const reviewsRoutes = require("./routes/reviews.js");
 const userRoutes = require("./routes/user.js");
 const cartRoutes = require("./routes/cart.js");
 
-
-//Connect Routers
+//Appending clusters of routes
 app.use("/products", productsRoutes);
 app.use("/reviews", reviewsRoutes);
 app.use("/user", userRoutes);
 app.use("/cart", cartRoutes);
 
-//Connect to MongoDB Server and Running Server.
+//Connecting to MongoDB Database and Running This Server.
 mongoose
   .connect(MDBCONNECTURL, {
     useNewUrlParser: true,
@@ -70,14 +46,14 @@ mongoose
     useCreateIndex: true,
   })
   .then(function () {
-    //Running Server Only When MongoDB Connection Succesfully Made.
+    //Running Server Only When MongoDB Connection Successfully Made.
     console.log("MongoDB Database Connected Successfully!");
     app.listen(port, function () {
       console.log("Sizzasneaks Server Running at Port: " + port);
     });
   })
   .catch(function (error) {
-    //Outputing MongoDB Connection Error and Not Running Server.
+    //Outputting MongoDB Connection Error and Not Running Server.
     console.log("MongoDB Database Connection Failed!");
     console.log(error);
   });

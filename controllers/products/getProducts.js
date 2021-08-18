@@ -3,26 +3,28 @@ const retrieveProductsByCategory = require("./functions/retrieveProductsByCatego
 var { STATUS_CODE } = require("../constants/httpConstants.js");
 
 const getProducts = async function (req, res, next) {
-  console.log("get Products");
+  console.log("Get Products");
 
   try {
     var retrieveProductsResult = await retrieveProductsByCategory(
-      req.body.credential,
-      req.query
+      //Performs the act of retrieving the products by the way of this function.
+      req.body.credential, //Supplies the credential type of the client that has invoked this function.
+      req.query //Supplies query parameters that are used to search for products by category
     );
-    console.log(req.body.credential);
-    console.log(req.body.userId);
 
+    //Checks if retrieving the products executed successfully.
     if (retrieveProductsResult.ok === true) {
-      res.statusCode = STATUS_CODE.SUCCESS;
-      res.send(retrieveProductsResult);
+      res.statusCode = STATUS_CODE.SUCCESS; //Attaches Success Status Code to response object.
+      res.send(retrieveProductsResult); //Sends product retrieved.
     } else {
-      res.status = STATUS_CODE.INTERNAL_SERVER_ERROR;
-      res.send(retrieveProductsResult);
+      res.status = STATUS_CODE.INTERNAL_SERVER_ERROR; //Attaches Internal Error Status Code to response object.
+      res.send(retrieveProductsResult); //Sends back object with ok set to false and with a message detailing the possible reason for execution failure.
     }
-  } catch {
-    res.status = STATUS_CODE.INTERNAL_SERVER_ERROR;
-    res.send({ ok: false, error: "Unkown Server Error" });
+  } catch (error) {
+    //Catches unexpected errors and returns a meaningful error object.
+    console.log(error);
+    res.status = STATUS_CODE.INTERNAL_SERVER_ERROR; //Attaches Internal Error Status Code to response object.
+    res.send({ ok: false, error: "Unknown Server Error" }); //Sends back object with ok set to false and with a message detailing the possible reason for execution failure.
   }
 };
 
