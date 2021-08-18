@@ -11,13 +11,14 @@ async function patchCartItem(req, res, next) {
       typeof req.body.option.color !== "undefined" &&
       typeof req.body.newQuantity !== "undefined"
     ) {
+      //Checking if credential is set to customer, only a customer can a make changes to their shopping cart.
       if (req.body.credential === "customer") {
-
         var matchCartItemResult = await matchCartItem(
           req.body.userId,
           req.body.product_id,
           req.body.option
         );
+        //Checking to see if the there was any cart item match.
         if (matchCartItemResult.ok === true) {
           var updateCartItemQuantityResult = await updateCartItemQuantity(
             req.body.userId,
@@ -26,17 +27,21 @@ async function patchCartItem(req, res, next) {
           );
 
           if (updateCartItemQuantityResult.ok === true) {
+            //Sending back a corresponding success Response
             res.status = STATUS_CODE.SUCCESS;
             res.send(updateCartItemQuantityResult);
           } else {
+            //Sending back a corresponding failure Response
             res.status = STATUS_CODE.BAD_REQUEST;
             res.send(updateCartItemQuantityResult);
           }
         } else {
+          //Sending back a corresponding failure Response
           res.status = STATUS_CODE.BAD_REQUEST;
           res.send(matchCartItemResult);
         }
       } else {
+        //Sending back a unauthorized response when the user is not of type customer.
         res.status = STATUS_CODE.UNAUTHORIZED;
         res.send({
           ok: false,
@@ -44,6 +49,7 @@ async function patchCartItem(req, res, next) {
         });
       }
     } else {
+      //Sending back a Bad request response when not all data is supplied.
       res.status = STATUS_CODE.BAD_REQUEST;
       res.send({
         ok: false,
@@ -52,6 +58,7 @@ async function patchCartItem(req, res, next) {
     }
   } catch (error) {
     console.log(error);
+    //Sending back a failure response due to an unexpected error being thrown.
     res.status = STATUS_CODE.INTERNAL_SERVER_ERROR;
     res.send({ ok: false, error: "Unknown Server Error" });
   }

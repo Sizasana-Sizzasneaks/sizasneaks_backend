@@ -57,7 +57,7 @@ const getReviews = async function (req, res, next) {
   } catch (error) {
     console.log(error);
     res.status = STATUS_CODE.INTERNAL_SERVER_ERROR; //Attaches Internal Error Status Code to response object.
-    res.send({ ok: false, error: "Unknown Server Error" }); //Sends back object with ok set to false and with a message detailing the reason for execution failure.
+    res.send({ ok: false, error: "Unknown Server Error" }); //Sending back a failure response due to an unexpected error being thrown.
   }
 };
 module.exports = getReviews;
