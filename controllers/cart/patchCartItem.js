@@ -1,5 +1,6 @@
 var { STATUS_CODE } = require("../constants/httpConstants.js");
 const updateCartItemQuantity = require("./functions/updateCartItemQuantity.js");
+const matchCartItem = require("./functions/matchCartItem.js");
 //This Route receives a product_id variable, option object(color, size) and a newQuanity variable.
 async function patchCartItem(req, res, next) {
   try {
@@ -11,23 +12,29 @@ async function patchCartItem(req, res, next) {
       typeof req.body.newQuantity !== "undefined"
     ) {
       if (req.body.credential === "customer") {
-        // passing necessary arguments to complete the actions 
-        // to update the quantity according to the users desired number
-        var updateCartItemQuantityResult = await updateCartItemQuantity(
+
+        var matchCartItemResult = await matchCartItem(
           req.body.userId,
           req.body.product_id,
-          req.body.option,
-          req.body.newQuantity
+          req.body.option
         );
-        
-        // sending back a response a successful change was made 
-        //it the users cart object or a failed message
-        if (updateCartItemQuantityResult.ok === true) {
-          res.status = STATUS_CODE.SUCCESS;
-          res.send(updateCartItemQuantityResult);
+        if (matchCartItemResult.ok === true) {
+          var updateCartItemQuantityResult = await updateCartItemQuantity(
+            req.body.userId,
+            matchCartItemResult.data._id,
+            req.body.newQuantity
+          );
+
+          if (updateCartItemQuantityResult.ok === true) {
+            res.status = STATUS_CODE.SUCCESS;
+            res.send(updateCartItemQuantityResult);
+          } else {
+            res.status = STATUS_CODE.BAD_REQUEST;
+            res.send(updateCartItemQuantityResult);
+          }
         } else {
           res.status = STATUS_CODE.BAD_REQUEST;
-          res.send(updateCartItemQuantityResult);
+          res.send(matchCartItemResult);
         }
       } else {
         res.status = STATUS_CODE.UNAUTHORIZED;
