@@ -1,13 +1,15 @@
 // File purpose get cartItem check if availability is true
 const mongoose = require("mongoose");
-
 const retrieveProducts = require("../../products/functions/retrieveProducts.js");
 
-// check availability,set to show, quantity is greater than the cust quantity
 async function checkProductAvailability(cartItem) {
   try {
+    // check cartItem is not undefined
     if (typeof cartItem !== "undefined") {
+      // replacing the cartItem object into a new placeholder  
       var newCartItem = { ...cartItem._doc };
+
+      // get products details
       var retrieveProductsResult = await retrieveProducts(
         {
           //search
@@ -20,38 +22,45 @@ async function checkProductAvailability(cartItem) {
           options: 1,
         }
       );
+
       if (retrieveProductsResult.ok === true) {
+        //if product is retrieved successful check the value 
+        //in the available and showProduct
         if (
           retrieveProductsResult.data[0].available === true &&
           retrieveProductsResult.data[0].showProduct === true
+
+          // if product is available and admin sets visibility to true 
+          // check the quantity of products incase the product is not in the inventory
         ) {
           var productOptions = retrieveProductsResult.data[0].options;
           var checkingAvailableQuantityResult = await checkingAvailableQuantity(
             productOptions,
             newCartItem
           );
+        
           if (checkingAvailableQuantityResult.ok === true) {
             newCartItem.available = true;
             return {
               ok: true,
               data: newCartItem,
-              message: "Availiability is true",
+              message: "Availability is true",
             };
           } else {
             newCartItem.available = false;
             return {
               ok: true,
               data: newCartItem,
-              message: "Availiability is Not True -All",
+              message: "Availability is Not True -All",
             };
           }
         } else {
-          newCartItem.checkProductAvailabilityavailable = false;
-          //product is checked for availablity but availability is false
+          newCartItem.available = false;
+          //product is checked for availability but availability is false
           return {
             ok: true,
             data: newCartItem,
-            message: "Availiability is Not True -Show, Avail",
+            message: "Availability is Not True -Show, Avail",
           };
         }
       } else {
@@ -72,7 +81,7 @@ module.exports = checkProductAvailability;
 
 function checkingAvailableQuantity(productOptions, cartItem) {
   // match the options user selected and the actual product options
-  //  var corresponding option determines if option is found
+  // var corresponding option determines if option is found
 
   try {
     var option = {};
@@ -80,6 +89,8 @@ function checkingAvailableQuantity(productOptions, cartItem) {
     var variantFound = false;
     var optionFound = false;
 
+    // loop through the products available options 
+    // check models\ProductOption.js for the structure
     for (var i = 0; i < productOptions.length; i++) {
       if (productOptions[i].color === cartItem.option.color) {
         optionFound = true;
@@ -87,6 +98,8 @@ function checkingAvailableQuantity(productOptions, cartItem) {
       }
     }
 
+    // color acts as key in the product options object
+    // if color is found check variants  
     if (optionFound) {
       for (var x = 0; x < option.variants.length; x++) {
         if (option.variants[x].size === cartItem.option.size) {

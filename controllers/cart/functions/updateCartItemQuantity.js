@@ -4,13 +4,18 @@ const Customer = require("../../../models/Customer.js");
 //a user's shopping cart.
 function updateCartItemQuantity(userId, cartItem_id, newQuanity) {
   if (
+    // checks that the argument is not undefined
     typeof userId !== "undefined" &&
     typeof cartItem_id !== "undefined" &&
     typeof newQuanity !== "undefined"
   ) {
+
+    // using Moongose API to update users cartItem 
+    // $set refers to actual updating 
     return Customer.updateOne(
       {
         userId: userId,
+
         "cart._id": cartItem_id,
       },
       {
@@ -19,12 +24,10 @@ function updateCartItemQuantity(userId, cartItem_id, newQuanity) {
         },
       }
     )
-      .then((info) => {
-        return { ok: true, message: "Quantity Changed Succesfully" };
+      .then(() => {
+        return { ok: true, message: "Quantity Changed Successfully" };
       })
-      .catch((error) => {
-        console.log("Error in updateCartItemQuantity function");
-        console.log(error);
+      .catch(() => {
         return { ok: false, message: "Quantity Change Failed" };
       });
   } else {

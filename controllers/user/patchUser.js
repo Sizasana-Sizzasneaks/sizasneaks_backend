@@ -6,9 +6,11 @@ const patchUser = async function (req, res) {
   console.log(req.body);
 
   try {
+    //checks if it is a customer else deny access  
     if (req.body.credential === "customer") {
       var updateUserResult = await updateUser(req.body.userId, req.body);
 
+      // validate result value return
       if (updateUserResult.ok === true) {
         res.status = STATUS_CODE.SUCCESS;
         res.send({ ok: true });
@@ -25,7 +27,7 @@ const patchUser = async function (req, res) {
     }
   } catch (error) {
     res.status = STATUS_CODE.INTERNAL_SERVER_ERROR;
-    res.send({ ok: false, error: "Unkown Server Error" });
+    res.send({ ok: false, error: "Unknown Server Error" });
   }
 };
 

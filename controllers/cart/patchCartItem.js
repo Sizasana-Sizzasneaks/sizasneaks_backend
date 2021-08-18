@@ -5,18 +5,19 @@ const matchCartItem = require("./functions/matchCartItem.js");
 async function patchCartItem(req, res, next) {
   try {
     if (
+      // check argument are not undefined
       typeof req.body.product_id !== "undefined" &&
       typeof req.body.option.size !== "undefined" &&
       typeof req.body.option.color !== "undefined" &&
       typeof req.body.newQuantity !== "undefined"
     ) {
       if (req.body.credential === "customer") {
+
         var matchCartItemResult = await matchCartItem(
           req.body.userId,
           req.body.product_id,
           req.body.option
         );
-
         if (matchCartItemResult.ok === true) {
           var updateCartItemQuantityResult = await updateCartItemQuantity(
             req.body.userId,
@@ -52,7 +53,7 @@ async function patchCartItem(req, res, next) {
   } catch (error) {
     console.log(error);
     res.status = STATUS_CODE.INTERNAL_SERVER_ERROR;
-    res.send({ ok: false, error: "Unkown Server Error" });
+    res.send({ ok: false, error: "Unknown Server Error" });
   }
 }
 

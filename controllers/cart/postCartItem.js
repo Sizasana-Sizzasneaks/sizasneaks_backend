@@ -8,6 +8,7 @@ const postCartItem = async function (req, res) {
   console.log("Post Cart Item");
 
   try {
+
     if (
       typeof req.body.product_id !== "undefined" &&
       typeof req.body.variant !== "undefined"
@@ -16,6 +17,7 @@ const postCartItem = async function (req, res) {
         console.log(req.body);
 
         var matchCartItemResult = await matchCartItem(
+
           req.body.userId,
           req.body.product_id,
           req.body.variant
@@ -70,7 +72,7 @@ const postCartItem = async function (req, res) {
   } catch (error){
     console.log(error);
     res.status = STATUS_CODE.INTERNAL_SERVER_ERROR;
-    res.send({ ok: false, error: "Unkown Server Error" });
+    res.send({ ok: false, error: "Unknown Server Error" });
   }
 };
 module.exports = postCartItem;

@@ -3,10 +3,10 @@ const Customer = require("../../../models/Customer.js");
 const prepareUserData = require("./prepareUserData.js");
 
 async function createNewUser(userId, userData) {
- 
+  
+  // creating a users display name
   var data = await prepareUserData(userData);
-
-
+  // creating a customer model
   var customer = await new Customer({ userId: userId, ...data });
 
   return customer

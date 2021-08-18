@@ -8,13 +8,14 @@ const postUser = async (req, res) => {
 
   // Take User ID and create new User
   try {
+    //checks if it is a customer or not 
     if (req.body.credential === "customer") {
       var createNewUserResult = await createNewUser(req.body.userId, req.body);
 
       if (createNewUserResult.ok === true) {
         if (typeof req.body.email !== "undefined") {
 
-         // Sending Succesfull SigUp Email
+         // Sending Successful SigUp Email 
           successfulSignUp(req.body.email);
         } 
 
@@ -33,7 +34,7 @@ const postUser = async (req, res) => {
     }
   } catch {
     res.status = STATUS_CODE.INTERNAL_SERVER_ERROR;
-    res.send({ ok: false, error: "Unkown Server Error" });
+    res.send({ ok: false, error: "Unknown Server Error" });
   }
 };
 
