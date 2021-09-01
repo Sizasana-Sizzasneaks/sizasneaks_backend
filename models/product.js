@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const ProductOption = require("./ProductOption.js");
+const Image = require("./Image.js")
 
 const Schema = mongoose.Schema;
 
@@ -31,7 +32,7 @@ const ProductSchema = new Schema(
     },
     //An array of URLs that point directly to a products image(s).
     imgURls: {
-      type: [String],
+      type: [Image],
     },
     //A boolean variable that is used to determine weather or not a product should be viewable to customers.
     showProduct: {

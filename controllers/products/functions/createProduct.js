@@ -1,4 +1,4 @@
-const Product = require("../../../models/product.js"); 
+const Product = require("../../../models/product.js");
 
 async function createProduct(product) {
   //Checks that all function arguments are not undefined before execution.
@@ -10,7 +10,9 @@ async function createProduct(product) {
       .then(() => {
         return { ok: true, message: "product created" }; //Returns successful object and message when saving of a new product completes correctly.
       })
-      .catch(() => {
+      .catch((error) => {
+        console.log("Failed To Make Product");
+        console.log(error);
         return { ok: false, message: "Failed To Create New product" }; //Returns unsuccessful object and message when saving of new product/inventory item fails.
       });
   } else {
