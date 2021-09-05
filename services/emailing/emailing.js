@@ -2,6 +2,7 @@ const sendGridMail = require("@sendgrid/mail");
 
 var { prepareReviewReplyEmailContent } = require("./prepareEmailContent.js");
 
+
 const successfulSignUp = (email) => {
   try {
     //Setting up SendGrid package with the platform API Key.
