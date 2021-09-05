@@ -1,6 +1,7 @@
 const retrieveProductsByCategory = require("./functions/retrieveProductsByCategory.js");
 
 var { STATUS_CODE } = require("../constants/httpConstants.js");
+const retrieveReviews = require("../reviews/functions/RetriveReviews.js");
 
 const getProducts = async function (req, res, next) {
   console.log("Get Products");
@@ -14,8 +15,30 @@ const getProducts = async function (req, res, next) {
 
     //Checks if retrieving the products executed successfully.
     if (retrieveProductsResult.ok === true) {
+      var products = retrieveProductsResult.data;
+
+      for (var x = 0; x < products.length; x++) {
+        var getProductReviewsResult = await retrieveReviews(products[x]._id, {
+          _id: 0,
+          rating: 1,
+        });
+
+        if (getProductReviewsResult.ok) {
+          var sum = 0;
+          var averageRating = 0;
+          for (var i = 0; i < getProductReviewsResult.data.length; i++) {
+            sum += getProductReviewsResult.data[i].rating;
+          }
+          averageRating = sum / getProductReviewsResult.data.length;
+
+          products[x].averageRating = averageRating.toFixed(1);
+        } else {
+          products[x].averageRating = 0.0;
+        }
+      }
+
       res.statusCode = STATUS_CODE.SUCCESS; //Attaches Success Status Code to response object.
-      res.send(retrieveProductsResult); //Sends product retrieved.
+      res.send({ ok: true, data: products }); //Sends product retrieved.
     } else {
       res.status = STATUS_CODE.INTERNAL_SERVER_ERROR; //Attaches Internal Error Status Code to response object.
       res.send(retrieveProductsResult); //Sends back object with ok set to false and with a message detailing the possible reason for execution failure.
