@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const ShoppingCartItem = require("./ShoppingCartItem.js");
+const shippingAddress= require("./ShippingAdr.js");
 
 const Schema = mongoose.Schema; //Building a Mongoose Schema Object
 
@@ -20,7 +21,7 @@ const CustomerSchema = new Schema({
   isAnonymous: Boolean,
   //This is an array of shopping cart items that represent a users shopping cart.
   cart: [ShoppingCartItem],
-  // shippingAddresses: [shippingAddress],
+   shippingAddresses: [shippingAddress],
   // wishlist: [String],
 });
 

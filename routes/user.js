@@ -23,6 +23,13 @@ router.post("/",handleCredentialClaims, verifyUserIdToken, postUser);
 const patchUser = require("../controllers/user/patchUser.js");
 router.patch("/", handleCredentialClaims, verifyUserIdToken, patchUser);
 
-
+// create new User Shipping address
+const postShippingAddress = require("../controllers/shippingAdr/postShipAdr.js");
+router.post(
+  "/shipping",
+  handleCredentialClaims,
+  verifyUserIdToken,
+  postShippingAddress
+);
 
 module.exports = router;
