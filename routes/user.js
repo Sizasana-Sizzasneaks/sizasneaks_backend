@@ -24,5 +24,15 @@ router.patch("/", handleCredentialClaims, verifyUserIdToken, patchUser);
 const postLogInUser = require("../controllers/user/postLogInUser.js");
 router.post("/log-in", handleCredentialClaims, verifyUserIdToken, postLogInUser);
 
+//Shipping
+
+// create new User Shipping address
+const postShippingAddress = require("../controllers/shippingAddress/postShippingAddress.js");
+router.post(
+  "/shipping",
+  handleCredentialClaims,
+  verifyUserIdToken,
+  postShippingAddress
+);
 
 module.exports = router;
