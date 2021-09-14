@@ -2,6 +2,7 @@ const sendGridMail = require("@sendgrid/mail");
 
 var { prepareReviewReplyEmailContent } = require("./prepareEmailContent.js");
 
+
 const successfulSignUp = (email) => {
   try {
     //Setting up SendGrid package with the platform API Key.
@@ -16,6 +17,41 @@ const successfulSignUp = (email) => {
       dynamicTemplateData: {
         message:
           "Your account signup was successful. Welcome to the Sizzasneaks family, we hope you have a pleasant experience while shopping with us.",
+      },
+    };
+    //Sending The email message using the the SendGrid package.
+    return sendGridMail
+      .send(msg)
+      .then(() => {
+        return { ok: true }; //Returning in the event that the email is sent successfully.
+      })
+      .catch((error) => {
+        return { ok: false, message: error }; //Returning in the event that the email is not successfully sent.
+      });
+  } catch (error) {
+    console.log(error);
+    return { ok: false, message: "Unknown Server Error" }; //Returning when an unexpected error is thrown.
+  }
+};
+
+const successfulLogIn = (email) => {
+  try {
+    //Setting up SendGrid package with the platform API Key.
+    sendGridMail.setApiKey(process.env.SENDGRID_API_KEY);
+
+    //Calculate time
+    var dateTime = new Date();
+
+    var logInTimeStamp = dateTime.toLocaleString();
+    //Constructing a message component with the details of the message.
+    const msg = {
+      to: { email: email }, //Receivers email address.
+      from: { email: "sizasanateam@gmail.com", name: "Sizzasneaks" }, //Senders email address.
+      templateId: "d-3a53d952081447f188b3e1c010104ea9", //Specifying the template to be used.
+      //Adding dynamic data that will fill be presented within the corresponding email message.
+      dynamicTemplateData: {
+        email: email,
+        logInTime: logInTimeStamp,
       },
     };
     //Sending The email message using the the SendGrid package.
@@ -78,4 +114,4 @@ const reviewReplyEmail = async (emailContent) => {
   }
 };
 
-module.exports = { successfulSignUp, reviewReplyEmail };
+module.exports = { successfulSignUp, successfulLogIn, reviewReplyEmail };

@@ -10,6 +10,7 @@ async function retrieveCartByUserId(userId){
            });
            // checks if user does have an existing cart object and send it
            if(retrieveUserDetailsResult.ok=== true){
+            
              return { ok: true, data: retrieveUserDetailsResult.data.cart  };
            }else
            {

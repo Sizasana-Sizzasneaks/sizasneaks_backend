@@ -34,13 +34,15 @@ router.put(
 
 //Create product Controller & Route
 const postProduct = require("../controllers/products/postProduct.js");
-router.post(
-  "/",
+router.post("/", handleCredentialClaims, verifyUserIdToken, postProduct);
+
+//Get list of Product Brands
+const getProductBrands = require("../controllers/products/getProductBrands.js");
+router.get(
+  "/brands/list",
   handleCredentialClaims,
   verifyUserIdToken,
-  postProduct
+  getProductBrands
 );
-
-
 
 module.exports = router;

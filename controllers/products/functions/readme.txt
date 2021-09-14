@@ -52,7 +52,7 @@ retrieveProductsByCategory.js
 
 Inputs(Arguments)
 1. userCredential (String) - Identifies the user type of the client invoking this function. 
-1. queryObject (object) - This object contains variables that match fields within the database, in order to find a matching document.
+2. queryObject (object) - This object contains variables that match fields within the database, in order to find a matching document.
 
 Use(Purpose)
 This function aims are getting product/inventory item(s) based on a search criteria, filtering the data it returns based on the credential type it receives.
