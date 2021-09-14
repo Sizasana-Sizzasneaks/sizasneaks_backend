@@ -31,7 +31,7 @@ async function createShippingAddress(
     // and updating user details by adding a shopping cart item
     return Customer.findOneAndUpdate(
       { userId: userId },
-      { $push: { ShippingAddress: shippingAddress } }
+      { $push: { "shippingAddresses": shippingAddress } }
     )
       .then(() => {
         return { ok: true, message: "Shipping Address added" };
