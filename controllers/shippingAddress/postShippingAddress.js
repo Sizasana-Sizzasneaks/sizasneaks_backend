@@ -2,7 +2,7 @@
 var { STATUS_CODE } = require("../constants/httpConstants.js");
 
 // customer can have more than one shipping address
-const createShippingAdrArray = require("./functions/createShippingAddress.js");
+const createShippingAddress = require("./functions/createShippingAddress.js");
 
 //postShippingAddress functionality
 const postShippingAddress = async function (req, res) {

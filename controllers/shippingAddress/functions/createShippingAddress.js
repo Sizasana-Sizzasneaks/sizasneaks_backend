@@ -1,30 +1,39 @@
 const mongoose = require("mongoose");
 const Customer = require("../../../models/Customer.js");
 
-async function createShippingAddress(userId,addressName,addressLineOne,addressLineTwo,
-                                        city,province,country,zipCode,contactNumber) {
+async function createShippingAddress(
+  userId,
+  addressName,
+  addressLineOne,
+  addressLineTwo,
+  city,
+  province,
+  country,
+  zipCode,
+  contactNumber
+) {
   console.log("add to Users shipping adr");
   // check arguments are not undefined
-  if (
-    typeof userId !== "undefined"
-  ) {
-    // create a projection to query the database 
+  if (typeof userId !== "undefined") {
+    // create a projection to query the database
     var shippingAddress = {
+      addressName: addressName,
       addressLineOne: addressLineOne,
-      addressLineTwo: addressLineTwo ,
+      addressLineTwo: addressLineTwo,
       city: city,
       province: province,
-      country:country ,
-      zipCode:zipCode ,
-      contactNumber:contactNumber,
+      country: country,
+      zipCode: zipCode,
+      contactNumber: contactNumber,
     };
-    
-    // use Moongose API to search through the user 
+
+    // use Moongose API to search through the user
     // and updating user details by adding a shopping cart item
     return Customer.findOneAndUpdate(
       { userId: userId },
-      { $push: { "ShippingAddress": shippingAddress } }
-    ).then(() => {
+      { $push: { ShippingAddress: shippingAddress } }
+    )
+      .then(() => {
         return { ok: true, message: "Shipping Address added" };
       })
       .catch((error) => {
