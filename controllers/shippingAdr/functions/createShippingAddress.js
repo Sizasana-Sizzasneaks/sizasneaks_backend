@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Customer = require("../../../models/Customer.js");
 
-async function createShippingAddress(userId,addressLineOne,addressLineTwo,
+async function createShippingAddress(userId,addressName,addressLineOne,addressLineTwo,
                                         city,province,country,zipCode,contactNumber) {
   console.log("add to Users shipping adr");
   // check arguments are not undefined
@@ -23,7 +23,7 @@ async function createShippingAddress(userId,addressLineOne,addressLineTwo,
     // and updating user details by adding a shopping cart item
     return Customer.findOneAndUpdate(
       { userId: userId },
-      { $push: { "shipping address": shippingAddress } }
+      { $push: { "ShippingAddress": shippingAddress } }
     ).then(() => {
         return { ok: true, message: "Shipping Address added" };
       })

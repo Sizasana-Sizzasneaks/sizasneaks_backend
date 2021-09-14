@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const ShoppingCartItem = require("./ShoppingCartItem.js");
-const shippingAddress= require("./ShippingAdr.js");
+const shippingAddress= require("./ShippingAddress.js");
 
 const Schema = mongoose.Schema; //Building a Mongoose Schema Object
 
