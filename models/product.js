@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const ProductOption = require("./ProductOption.js");
-const Image = require("./Image.js")
+const Image = require("./Image.js");
 
 const Schema = mongoose.Schema;
 
@@ -29,6 +29,10 @@ const ProductSchema = new Schema(
     //An Array of product options that detail the various options of a product.
     options: {
       type: [ProductOption],
+    },
+    // This variable holds the current average rating score for the product.
+    averageRatingScore: {
+      type: Number,
     },
     //An array of URLs that point directly to a products image(s).
     imgURls: {
