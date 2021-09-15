@@ -32,7 +32,7 @@ async function createProductReview(userId, productId, reviewData) {
           product_id: productId,
           rating: reviewData.rating,
           body: reviewData.body,
-        });
+        }); 
 
         //Saving the review object that has just be created.
         return review
@@ -59,3 +59,4 @@ async function createProductReview(userId, productId, reviewData) {
 }
 
 module.exports = createProductReview;
+ 
