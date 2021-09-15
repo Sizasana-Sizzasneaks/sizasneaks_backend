@@ -2,17 +2,22 @@ var express = require("express");
 const router = express.Router();
 
 //Verify User ID
-/* const verifyUserIdToken = require("../controllers/user/functions/verifyUserIdToken.js");
+const verifyUserIdToken = require("../controllers/user/functions/verifyUserIdToken.js");
 
 //Handle Credential Claims
 const handleCredentialClaims = require("../controllers/user/functions/handleCredentialClaims.js");
- */
-//Get Reviews Controller & Route
-//Get Reviews Controller & Route
-const getOrders = require("../controllers/orders/getOrders");
-router.get(
-  "/",getOrders
-);
+
+
+//Get Orders Controller & Route
+const getOrders = require("../controllers/orders/getOrders.js");
+router.get("/", handleCredentialClaims, verifyUserIdToken, getOrders);
+
+//Get an Order Controller & Route
+const getOrder = require("../controllers/orders/getOrder.js");
+router.get("/:orderId", handleCredentialClaims, verifyUserIdToken, getOrder);
+
+
+
 
 //Create Reviews Controller & Route
 /* const postOrderItem = require("../controllers/orders/postOrderItem.js");
@@ -22,10 +27,6 @@ router.post(
 ); */
 
 const postOrder = require("../controllers/orders/postOrder.js");
-router.post(
-  "/",
-  postOrder
-);
-
+router.post("/", postOrder);
 
 module.exports = router;
