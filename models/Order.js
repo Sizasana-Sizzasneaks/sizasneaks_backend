@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const OrderItem = require("./OrderItem.js");
+const shippingAddress = require("./ShippingAddress.js");
 
 const Schema = mongoose.Schema; //Building a Mongoose Schema Object
 
@@ -9,7 +10,7 @@ const OrderSchema = new Schema(
       type: String,
       required: true,
     },
-    //shippingAddress: shippingAddress,
+    shippingAddress: shippingAddress,
     orderItems: { type: [String], required: true },
     shippingCost: {
       type: Number,
