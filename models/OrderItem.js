@@ -48,6 +48,7 @@ const orderItem = new Schema(
 );
 
 //Building a Model object from the Mongoose Schema Object.
-const OrderItemModel = mongoose.model("OrderItem", orderItem);
+const OrderItemModel = mongoose.model("OrderItems", orderItem);
 
-module.exports = orderItem;
+module.exports = OrderItemModel;
+
