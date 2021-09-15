@@ -8,13 +8,11 @@ const router = express.Router();
 const handleCredentialClaims = require("../controllers/user/functions/handleCredentialClaims.js");
  */
 //Get Reviews Controller & Route
-/* const getOrderItem = require("../controllers/reviews/getReviews.js");
+//Get Reviews Controller & Route
+const getOrders = require("../controllers/orders/getOrders");
 router.get(
-  "/:product_id",
-  handleCredentialClaims,
-  verifyUserIdToken,
-  getOrderItem
-); */
+  "/",getOrders
+);
 
 //Create Reviews Controller & Route
 /* const postOrderItem = require("../controllers/orders/postOrderItem.js");
