@@ -80,6 +80,7 @@ async function retrieveProductsByCategory(userCredential, queryObject) {
         options: 1,
         imgURls: 1,
         sellingPrice: 1,
+        averageRatingScore: 1
       };
     }
 

@@ -18,11 +18,13 @@ router.get(
 
 //Create Reviews Controller & Route
 const postReview = require("../controllers/reviews/postReview.js");
+const updateProductAverageRatingScore = require("../controllers/reviews/functions/updateProductAverageRatingScore.js");
 router.post(
   "/:product_id",
   handleCredentialClaims,
   verifyUserIdToken,
-  postReview
+  postReview,
+  updateProductAverageRatingScore
 );
 
 //Delete Reviews Controller & Route
