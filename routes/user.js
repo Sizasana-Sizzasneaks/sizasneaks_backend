@@ -1,7 +1,6 @@
 var express = require("express");
 const router = express.Router();
 
-
 //Handle Credential Claims
 const handleCredentialClaims = require("../controllers/user/functions/handleCredentialClaims.js");
 
@@ -14,7 +13,7 @@ router.get("/", handleCredentialClaims, verifyUserIdToken, getUser);
 
 //Create new User Profile
 const postUser = require("../controllers/user/postUser.js");
-router.post("/",handleCredentialClaims, verifyUserIdToken, postUser);
+router.post("/", handleCredentialClaims, verifyUserIdToken, postUser);
 
 //Update User Profile
 const patchUser = require("../controllers/user/patchUser.js");
@@ -22,7 +21,12 @@ router.patch("/", handleCredentialClaims, verifyUserIdToken, patchUser);
 
 //Get User Profile Data
 const postLogInUser = require("../controllers/user/postLogInUser.js");
-router.post("/log-in", handleCredentialClaims, verifyUserIdToken, postLogInUser);
+router.post(
+  "/log-in",
+  handleCredentialClaims,
+  verifyUserIdToken,
+  postLogInUser
+);
 
 //Shipping
 
@@ -33,6 +37,15 @@ router.post(
   handleCredentialClaims,
   verifyUserIdToken,
   postShippingAddress
+);
+
+//Get a Specific User's Shipping Address
+const getShippingAddress = require("../controllers/shippingAddress/getShippingAddress.js");
+router.get(
+  "/shipping/:addressId",
+  handleCredentialClaims,
+  verifyUserIdToken,
+  getShippingAddress
 );
 
 module.exports = router;
