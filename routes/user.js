@@ -48,4 +48,13 @@ router.get(
   getShippingAddress
 );
 
+
+//Update a User's Specific Shipping Address
+const putProduct = require("../controllers/products/putProduct.js");
+router.put(
+  "/:addressId",
+  handleCredentialClaims,
+  verifyUserIdToken,
+  putProduct
+);
 module.exports = router;
