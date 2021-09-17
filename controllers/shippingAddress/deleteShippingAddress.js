@@ -1,7 +1,7 @@
 var { STATUS_CODE } = require("../constants/httpConstants.js");
 
 const retrieveShippingAddressById = require("./functions/retrieveShippingAddressById.js");
-const deleteShippingAddress= require("./functions/deleteShippingAddressById.js")
+const deleteShippingAddressById= require("./functions/deleteShippingAddressById.js")
 
 const deleteShippingAddress = async function (req, res) {
   try {
@@ -11,7 +11,7 @@ const deleteShippingAddress = async function (req, res) {
 
       //Making sure that an address id is supplied.
       if (typeof req.body.addressId !== "undefined") {
-          var deleteShippingAddressResult= await deleteShippingAddress(
+          var deleteShippingAddressResult= await deleteShippingAddressById(
             req.body.userId,
             req.body.addressId,
           );
