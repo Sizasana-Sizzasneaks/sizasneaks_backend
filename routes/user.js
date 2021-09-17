@@ -42,19 +42,18 @@ router.post(
 //Get a Specific User's Shipping Address
 const getShippingAddress = require("../controllers/shippingAddress/getShippingAddress.js");
 router.get(
-  "/shipping/:addressId",
+  "/shipping/address",
   handleCredentialClaims,
   verifyUserIdToken,
   getShippingAddress
 );
 
-
 //Update a User's Specific Shipping Address
-const putProduct = require("../controllers/products/putProduct.js");
+const putShippingAddress = require("../controllers/shippingAddress/putShippingAddress.js");
 router.put(
-  "/:addressId",
+  "/shipping/address",
   handleCredentialClaims,
   verifyUserIdToken,
-  putProduct
+  putShippingAddress
 );
 module.exports = router;

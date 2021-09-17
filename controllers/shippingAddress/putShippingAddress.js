@@ -1,39 +1,36 @@
-var { STATUS_CODE } = require("../constants/httpConstants.js");
+const updateShippingAddressById = require("./functions/updateShippingAddressById.js");
 
-const retrieveShippingAddressById = require("./functions/retrieveShippingAddressById.js");
-
-const getShippingAddress = async function (req, res) {
+const putShippingAddress = async function (req, res) {
   try {
-    console.log("Get Shipping Address");
+    console.log("Put Shipping Address");
     //Only Customers can request their own SHipping Addresses
     if (req.body.credential === "customer") {
-      //Making sure that an address id is supplied.
-      if (typeof req.query.addressId !== "undefined") {
-        var retrieveShippingAddressByIdResult =
-          await retrieveShippingAddressById(
-            req.body.userId,
-            req.query.addressId
-          );
-        // Checking of Retrieving of Shipping address was successful.
-        if (retrieveShippingAddressByIdResult.ok) {
+      //Making sure that an address id and AddressData are supplied.
+      if (
+        typeof req.body.addressId !== "undefined" &&
+        typeof req.body.addressData !== "undefined"
+      ) {
+        var updateShippingAddressByIdResult = await updateShippingAddressById(
+          req.body.userId,
+          req.body.addressId,
+          req.body.addressData
+        );
+        // Checking of Updating of Shipping address was successful.
+        if (updateShippingAddressByIdResult.ok) {
           //Sending back a corresponding success Response
           res.status = STATUS_CODE.SUCCESS;
-          res.send({
-            ok: true,
-            data: retrieveShippingAddressByIdResult.data
-              .shippingAddresses[0],
-          });
+          res.send(updateShippingAddressByIdResult);
         } else {
-          //Sending back a corresponding failure Response
           res.status = STATUS_CODE.BAD_REQUEST;
-          res.send(retrieveShippingAddressByIdResult);
+          res.send(updateShippingAddressByIdResult);
         }
       } else {
         res.status = STATUS_CODE.BAD_REQUEST; //Attaches Bad Request Status Code to response object.
         res.send({
           //Sends back object with ok set to false and with a message detailing the possible reason for execution failure.
           ok: false,
-          message: "Please provide a shipping addressId value",
+          message:
+            "Please provide a shipping addressId value and addressData to update the corresponding address.",
         });
       }
     } else {
@@ -51,4 +48,4 @@ const getShippingAddress = async function (req, res) {
   }
 };
 
-module.exports = getShippingAddress;
+module.exports = putShippingAddress;
