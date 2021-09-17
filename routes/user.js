@@ -56,4 +56,13 @@ router.put(
   verifyUserIdToken,
   putShippingAddress
 );
+
+//delete a User's Specific Shipping Address
+const deleteShippingAddress = require("../controllers/shippingAddress/deleteShippingAddress.js");
+router.delete(
+  "/shipping/address",
+  handleCredentialClaims,
+  verifyUserIdToken,
+  deleteShippingAddress
+);
 module.exports = router;
