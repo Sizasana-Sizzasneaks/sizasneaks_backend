@@ -7,8 +7,10 @@ const deleteShippingAddress = async function (req, res) {
     console.log("Delete Shipping Address");
     //Only Customers can request their own SHipping Addresses
     if (req.body.credential === "customer") {
+
       //Making sure that an address id is supplied.
       if (typeof req.body.addressId !== "undefined") {
+
         var deleteShippingAddressResult = await deleteShippingAddressById(
           req.body.userId,
           req.body.addressId
@@ -23,7 +25,9 @@ const deleteShippingAddress = async function (req, res) {
           res.send(deleteShippingAddressResult);
         }
       } else {
-        res.status = STATUS_CODE.BAD_REQUEST; //Attaches Bad Request Status Code to response object.
+        
+        //Attaches Bad Request Status Code to response object.
+        res.status = STATUS_CODE.BAD_REQUEST; 
         res.send({
           //Sends back object with ok set to false and with a message detailing the possible reason for execution failure.
           ok: false,

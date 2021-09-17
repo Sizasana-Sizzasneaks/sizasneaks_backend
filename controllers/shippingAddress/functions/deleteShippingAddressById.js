@@ -3,6 +3,10 @@ const Customer = require("../../../models/Customer.js");
 
 async function deleteShippingAddressById(userId, addressId) {
   try {
+    // use Moongose API 
+    // deleting an item within an array within an collection is a update 
+    // $pull refers to as removing a specific instance in this case 
+    // deleting a specific address by using the Id
     return Customer.updateOne(
       {
         userId: userId,
@@ -16,6 +20,7 @@ async function deleteShippingAddressById(userId, addressId) {
       }
     )
       .then(() => {
+        // return value for the function
         return { ok: true, message: "Shipping Address deleted Successfully" };
       })
       .catch((error) => {
