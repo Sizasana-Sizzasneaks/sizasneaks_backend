@@ -1,7 +1,7 @@
 const createProductReview = require("./functions/createProductReview.js");
 var { STATUS_CODE } = require("../constants/httpConstants.js");
 
-const postReview = async function (req, res) {
+const postReview = async function (req, res, next) {
   console.log("Create Review Controller");
 
   try {
@@ -16,8 +16,10 @@ const postReview = async function (req, res) {
           req.params.product_id,
           req.body
         );
+
         //First Check if creation of review was successful.
         if (createNewReviewResult.ok === true) {
+          next();
           res.status = STATUS_CODE.SUCCESS; // Attach Success Status Code to Response
           res.send(createNewReviewResult); //Send back an object that contains the corresponding success object.
         } else {
