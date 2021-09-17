@@ -24,5 +24,9 @@ router.patch("/", handleCredentialClaims, verifyUserIdToken, patchUser);
 const postLogInUser = require("../controllers/user/postLogInUser.js");
 router.post("/log-in", handleCredentialClaims, verifyUserIdToken, postLogInUser);
 
+//Get User Shipping addresses
+const getShippingAddresses = require("../controllers/shippingAddress/getShippingAddresses.js");
+router.get("/shipping", handleCredentialClaims, verifyUserIdToken, getShippingAddresses);
+
 
 module.exports = router;
