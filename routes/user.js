@@ -39,6 +39,10 @@ router.post(
   postShippingAddress
 );
 
+//Get User Shipping addresses
+const getShippingAddresses = require("../controllers/shippingAddress/getShippingAddresses.js");
+router.get("/shipping", handleCredentialClaims, verifyUserIdToken, getShippingAddresses);
+
 //Get a Specific User's Shipping Address
 const getShippingAddress = require("../controllers/shippingAddress/getShippingAddress.js");
 router.get(
