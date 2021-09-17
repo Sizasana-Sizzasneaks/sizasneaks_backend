@@ -1,16 +1,16 @@
-const  mongoose  = require("mongoose");
+const mongoose = require("mongoose");
 const Customer = require("../../../models/Customer.js");
 
 async function deleteShippingAddressById(userId, addressId) {
   try {
-    return Customer.UpdateOne(
+    return Customer.updateOne(
       {
         userId: userId,
       },
       {
         $pull: {
-          shippingAddress: {
-            _id:addressId,
+          shippingAddresses: {
+            _id: addressId,
           },
         },
       }
@@ -30,7 +30,8 @@ async function deleteShippingAddressById(userId, addressId) {
           return { ok: false, message: "Failed to delete Shipping Address" };
         }
       });
-  } catch {
+  } catch (error) {
+    console.log(error);
     return {
       ok: false,
       message: "Unexpected Error when deleting a users shipping address",

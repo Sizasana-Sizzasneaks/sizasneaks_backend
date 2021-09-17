@@ -1,32 +1,28 @@
 var { STATUS_CODE } = require("../constants/httpConstants.js");
 
-const deleteShippingAddressById= require("./functions/deleteShippingAddressById.js")
+const deleteShippingAddressById = require("./functions/deleteShippingAddressById.js");
 
 const deleteShippingAddress = async function (req, res) {
   try {
     console.log("Delete Shipping Address");
     //Only Customers can request their own SHipping Addresses
     if (req.body.credential === "customer") {
-
       //Making sure that an address id is supplied.
       if (typeof req.body.addressId !== "undefined") {
-          var deleteShippingAddressResult= 
-            await deleteShippingAddressById(
-              req.body.userId,
-              req.body.addressId,
-            );
-          // Checking of Updating of Shipping address was successful.
-          if (deleteShippingAddressResult.ok) {
-            //Sending back a corresponding success Response
-            res.status = STATUS_CODE.SUCCESS;
-            res.send(deleteShippingAddressResult);
-          } 
-          else {
-            res.status = STATUS_CODE.BAD_REQUEST;
-            res.send(deleteShippingAddressResult);
-          }
-      } 
-      else {
+        var deleteShippingAddressResult = await deleteShippingAddressById(
+          req.body.userId,
+          req.body.addressId
+        );
+        // Checking of Updating of Shipping address was successful.
+        if (deleteShippingAddressResult.ok) {
+          //Sending back a corresponding success Response
+          res.status = STATUS_CODE.SUCCESS;
+          res.send(deleteShippingAddressResult);
+        } else {
+          res.status = STATUS_CODE.BAD_REQUEST;
+          res.send(deleteShippingAddressResult);
+        }
+      } else {
         res.status = STATUS_CODE.BAD_REQUEST; //Attaches Bad Request Status Code to response object.
         res.send({
           //Sends back object with ok set to false and with a message detailing the possible reason for execution failure.
