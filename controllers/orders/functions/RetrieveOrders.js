@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Order = require("../../../models/Order.js");
 
-function retrieveOrders(){
+function retrieveOrders(userCredential, orderId){
     //Performs the search using the Mongoose API.
     return Order.find()
       .sort({ createdAt: "descending" }) //Sorting the reviews to be returned by their timestamp (descending order).
