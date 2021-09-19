@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const OrderItem = require("./OrderItem.js");
 const shippingAddress = require("./ShippingAddress.js");
 
 const Schema = mongoose.Schema; //Building a Mongoose Schema Object
@@ -39,6 +38,6 @@ const OrderSchema = new Schema(
 );
 
 //Building a Model object from the Mongoose Schema Object.
-const OrderModel = mongoose.model("Order", OrderSchema);
+const OrderModel = mongoose.model("orders", OrderSchema);
 
 module.exports = OrderModel;
