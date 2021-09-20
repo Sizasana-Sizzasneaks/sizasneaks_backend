@@ -24,16 +24,22 @@ const OrderSchema = new Schema(
     paymentTime: Date,
 
     hasShipped: {
-      type:Boolean,
-      required: true
+      type: Boolean,
+      required: true,
     },
     shippedTime: Date,
 
     hasBeenDelivered: {
-      type:Boolean,
-      required: true
+      type: Boolean,
+      required: true,
     },
-    deliveredTime: Date
+    deliveredTime: Date,
+
+    isCancelled: {
+      type: Boolean,
+    },
+    cancelTime: Date,
+    cancelDescription: String,
   },
   { timestamps: { createdAt: "createdAt" } }
 );
