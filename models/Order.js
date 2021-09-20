@@ -11,7 +11,10 @@ const OrderSchema = new Schema(
       required: true,
     },
     shippingAddress: shippingAddress,
-    orderItems: { type: [String], required: true },
+    orderItems: {
+      type: [{ type: Schema.Types.ObjectId, ref: "Orderitem" }],
+      required: true,
+    },
     shippingCost: {
       type: Number,
       required: true,

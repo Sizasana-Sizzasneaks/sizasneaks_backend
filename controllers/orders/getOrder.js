@@ -1,6 +1,4 @@
-const createError = require("http-errors");
-const mongoose = require("mongoose");
-
+const { USER_CREDENTIAL } = require("../constants/userType.js");
 const { STATUS_CODE } = require("../constants/httpConstants.js");
 
 const retrieveOrders = require("./functions/RetrieveOrders.js");
@@ -8,17 +6,45 @@ const retrieveOrders = require("./functions/RetrieveOrders.js");
 const getOrder = async function (req, res, next) {
   try {
     console.log("Get Order");
-    if (typeof req.params.orderID !== "undefined") {
-      //Checks that all function arguments are not undefined before execution.
-      var retrieveOrderByIdResult = await retrieveOrders(
-        //Performs the act of retrieving a specific order by the way of this function.
-        req.body.credential,
-        req.params.orderId
-      );
+    //Check if OrderId was supplied
+    if (typeof req.body.orderId !== "undefined") {
+      var search = {}; //Search object for retrieving order.
+      var projection = {}; //Projection object for retrieving orders.
+
+      if (req.body.credential === USER_CREDENTIAL.ADMINISTRATOR) {
+        //If Request is coming from an Administrator.
+        search = { _id: req.body.orderId };
+      } else if (req.body.credential === USER_CREDENTIAL.CUSTOMER) {
+        //If Request is coming from a Customer.
+        search = { _id: req.body.orderId, customer_id: req.body.userId };
+      } else {
+        //Returning if Credential type is not of Customer or Administrator.
+        res.status = STATUS_CODE.UNAUTHORIZED;
+        res.send({
+          ok: false,
+          message: "Access Denied: Insufficient Credentials",
+        });
+        return;
+      }
+      //Performs the act of retrieving a specific order by the way of this function.
+      var retrieveOrderByIdResult = await retrieveOrders(search, projection);
+
       //Checks if retrieving an order executed successfully.
       if (retrieveOrderByIdResult.ok === true) {
-        res.statusCode = STATUS_CODE.SUCCESS; //Attaches Success Status Code to response object.
-        res.send(retrieveOrderByIdResult); //Sends order retrieved.
+        var orderToReturn = retrieveOrderByIdResult.data[0];
+
+        //Checking that order belongs to customer that requested it.
+        if (orderToReturn.customer_id === req.body.userId) {
+          res.statusCode = STATUS_CODE.SUCCESS; //Attaches Success Status Code to response object.
+          res.send({ ok: true, data: orderToReturn }); //Sends order retrieved.
+        } else {
+          res.status = STATUS_CODE.UNAUTHORIZED;
+          res.send({
+            ok: false,
+            message:
+              "Access Denied: You are not authorized to view this order.",
+          });
+        }
       } else {
         res.status = STATUS_CODE.INTERNAL_SERVER_ERROR; //Attaches Internal Error Status Code to response object.
         res.send(retrieveOrderByIdResult); //Sends back object with ok set to false and with a message detailing the possible reason for execution failure.
@@ -30,7 +56,7 @@ const getOrder = async function (req, res, next) {
         ok: false,
         message: "Please provide a valid Order Id value",
       });
-    }   
+    }
   } catch (error) {
     //Catches unexpected errors and returns a meaningful error object.
     console.log(error);

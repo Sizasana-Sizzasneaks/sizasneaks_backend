@@ -7,17 +7,13 @@ const verifyUserIdToken = require("../controllers/user/functions/verifyUserIdTok
 //Handle Credential Claims
 const handleCredentialClaims = require("../controllers/user/functions/handleCredentialClaims.js");
 
-
 //Get Orders Controller & Route
 const getOrders = require("../controllers/orders/getOrders.js");
 router.get("/", handleCredentialClaims, verifyUserIdToken, getOrders);
 
 //Get an Order Controller & Route
 const getOrder = require("../controllers/orders/getOrder.js");
-router.get("/:orderId", handleCredentialClaims, verifyUserIdToken, getOrder);
-
-
-
+router.get("/order_item", handleCredentialClaims, verifyUserIdToken, getOrder);
 
 //Create Reviews Controller & Route
 /* const postOrderItem = require("../controllers/orders/postOrderItem.js");
