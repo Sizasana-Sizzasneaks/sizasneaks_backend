@@ -16,12 +16,9 @@ router.get("/", handleCredentialClaims, verifyUserIdToken, getOrders);
 const getOrder = require("../controllers/orders/getOrder.js");
 router.get("/:orderId", handleCredentialClaims, verifyUserIdToken, getOrder);
 
-//Update a Specific Product
-const putOrderStatus = require("../controllers/orders/putOrderStatus.js");
-router.put(
-  "/:orderId",
-  putOrderStatus
-);
+//Update a Specific Order Controller & Route
+const putOrder = require("../controllers/orders/putOrder.js");
+router.put("/:orderId", handleCredentialClaims, verifyUserIdToken,putOrder);
 
 //Create Order Item Controller & Route
 /* const postOrderItem = require("../controllers/orders/postOrderItem.js");
