@@ -114,7 +114,7 @@ async function postReviewReply(req, res, next) {
     console.log(error);
     //Sending a message when an unexpected unknown error is thrown.
     res.status = STATUS_CODE.INTERNAL_SERVER_ERROR;
-    res.send({ ok: false, error: "Unknown Server Error" });
+    res.send({ ok: false, message: "Unknown Server Error" });
   }
 }
 

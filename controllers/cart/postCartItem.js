@@ -66,7 +66,7 @@ const postCartItem = async function (req, res) {
         res.status = STATUS_CODE.UNAUTHORIZED;
         res.send({
           ok: false,
-          error: "Insufficient Credentials",
+          message: "Insufficient Credentials",
         });
       }
     } else {
@@ -74,13 +74,13 @@ const postCartItem = async function (req, res) {
       res.status = STATUS_CODE.BAD_REQUEST;
       res.send({
         ok: false,
-        error: "Insufficient Data Supplied",
+        message: "Insufficient Data Supplied",
       });
     }
   } catch (error) {
     console.log(error);
     res.status = STATUS_CODE.INTERNAL_SERVER_ERROR;
-    res.send({ ok: false, error: "Unknown Server Error" }); //Sending back a failure response due to an unexpected error being thrown.
+    res.send({ ok: false, message: "Unknown Server Error" }); //Sending back a failure response due to an unexpected error being thrown.
   }
 };
 module.exports = postCartItem;

@@ -30,20 +30,20 @@ async function deleteCartItem(req, res, next) {
         res.status = STATUS_CODE.UNAUTHORIZED;
         res.send({
           ok: false,
-          error: "Access Denied - Unauthorized Credentials",
+          message: "Access Denied - Unauthorized Credentials",
         });
       }
     } else {
       res.status = STATUS_CODE.BAD_REQUEST;
       res.send({
         ok: false,
-        error: "Insufficient Data Supplied",
+        message: "Insufficient Data Supplied",
       });
     }
   } catch (error) {
     console.log(error);
     res.status = STATUS_CODE.INTERNAL_SERVER_ERROR;
-    res.send({ ok: false, error: "Unknown Server Error" });
+    res.send({ ok: false, message: "Unknown Server Error" });
   }
 }
 

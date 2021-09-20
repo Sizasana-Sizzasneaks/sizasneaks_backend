@@ -46,7 +46,7 @@ const getCart = async function (req, res, next) {
   } catch (error) {
     console.log(error);
     res.status = STATUS_CODE.INTERNAL_SERVER_ERROR;
-    res.send({ ok: false, error: "Unknown Server Error" });
+    res.send({ ok: false, message: "Unknown Server Error" });
   }
 };
 

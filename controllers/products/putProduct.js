@@ -45,7 +45,7 @@ const putProduct = async function (req, res, next) {
       //Sends back object with ok set to false and with a message detailing the error (Unable to determine user credential).
       res.send({
         ok: false,
-        error: "Access Denied: Unable to determine User Credentials",
+        message: "Access Denied: Unable to determine User Credentials",
       });
     }
   } catch (error) {

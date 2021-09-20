@@ -28,7 +28,7 @@ function addReviewReply(reviewId, reviewReply) {
       });
   } else {
     //Returns unsuccessful object and message when reviewId and/or reviewReply arguments are not defined.
-    return { ok: false, error: "Review ID and/or Reply not supplied." };
+    return { ok: false, message: "Review ID and/or Reply not supplied." };
   }
 }
 
