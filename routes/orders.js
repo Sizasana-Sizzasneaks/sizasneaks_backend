@@ -26,7 +26,7 @@ router.post("/", handleCredentialClaims, verifyUserIdToken, postOrder);
 //Post Order Payment for a single Order
 const postOrderPayment = require("../controllers/orders/postOrderPayment.js");
 router.post(
-  "/order_item/payment",
+  "/payment",
   handleCredentialClaims,
   verifyUserIdToken,
   postOrderPayment
