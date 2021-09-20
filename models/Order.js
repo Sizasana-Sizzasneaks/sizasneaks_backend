@@ -12,7 +12,7 @@ const OrderSchema = new Schema(
     },
     shippingAddress: shippingAddress,
     orderItems: {
-      type: [{ type: Schema.Types.ObjectId, ref: "Orderitem" }],
+      type: [{ type: Schema.Types.ObjectId, ref: "OrderItems" }],
       required: true,
     },
     shippingCost: {
@@ -40,6 +40,7 @@ const OrderSchema = new Schema(
 
     isCancelled: {
       type: Boolean,
+      required: true
     },
     cancelTime: Date,
     cancelDescription: String,

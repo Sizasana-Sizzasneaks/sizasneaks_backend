@@ -6,7 +6,7 @@ function retrieveOrders(search, projection) {
     if (typeof search !== "undefined" && typeof projection !== "undefined") {
       //Performs the search using the Mongoose API.
       return Order.find(search, projection)
-        .populate("items")
+        .populate("orderItems")
         .sort({ createdAt: "descending" }) //Sorting the Orders to be returned by their timestamp (descending order).
         .lean()
         .then((docs) => {
@@ -22,7 +22,8 @@ function retrieveOrders(search, projection) {
             };
           }
         })
-        .catch(() => {
+        .catch((error) => {
+          console.log(error);
           return { ok: false, message: "Error when getting orders" }; //Returning a general error when an unknown error is thrown when searching for reviews.
         });
     } else {
