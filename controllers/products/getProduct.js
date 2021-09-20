@@ -28,7 +28,7 @@ const getProduct = async function (req, res, next) {
       res.send({
         //Sends back object with ok set to false and with a message detailing the possible reason for execution failure.
         ok: false,
-        message: "Please provide a Product Id value",
+        message: "Please provide a valid Product Id value",
       });
     }
   } catch (error) {

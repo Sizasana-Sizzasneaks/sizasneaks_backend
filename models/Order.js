@@ -11,7 +11,10 @@ const OrderSchema = new Schema(
       required: true,
     },
     shippingAddress: shippingAddress,
-    orderItems: { type: [String], required: true },
+    orderItems: {
+      type: [{ type: Schema.Types.ObjectId, ref: "OrderItems" }],
+      required: true,
+    },
     shippingCost: {
       type: Number,
       required: true,
@@ -24,16 +27,23 @@ const OrderSchema = new Schema(
     paymentTime: Date,
 
     hasShipped: {
-      type:Boolean,
-      required: true
+      type: Boolean,
+      required: true,
     },
     shippedTime: Date,
 
     hasBeenDelivered: {
-      type:Boolean,
+      type: Boolean,
+      required: true,
+    },
+    deliveredTime: Date,
+
+    isCancelled: {
+      type: Boolean,
       required: true
     },
-    deliveredTime: Date
+    cancelTime: Date,
+    cancelDescription: String,
   },
   { timestamps: { createdAt: "createdAt" } }
 );

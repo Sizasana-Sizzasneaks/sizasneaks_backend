@@ -16,12 +16,7 @@ router.get("/", handleCredentialClaims, verifyUserIdToken, getProducts);
 
 //Get Specific Product
 const getProduct = require("../controllers/products/getProduct.js");
-router.get(
-  "/:productId",
-  handleCredentialClaims,
-  verifyUserIdToken,
-  getProduct
-);
+router.get("/:productId", handleCredentialClaims, verifyUserIdToken,getProduct);
 
 //Update a Specific Product
 const putProduct = require("../controllers/products/putProduct.js");
