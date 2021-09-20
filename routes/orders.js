@@ -17,15 +17,19 @@ router.get("/order_item", handleCredentialClaims, verifyUserIdToken, getOrder);
 
 //Update a Specific Order Controller & Route
 const putOrder = require("../controllers/orders/putOrder.js");
-router.put("/:orderId", handleCredentialClaims, verifyUserIdToken,putOrder);
+router.put("/:orderId", handleCredentialClaims, verifyUserIdToken, putOrder);
 
-/* const postOrderItem = require("../controllers/orders/postOrderItem.js");
-router.post(
-  "/orderItem",
-  postOrderItem
-);  */
-
+//Post Order - Creating and Order
 const postOrder = require("../controllers/orders/postOrder.js");
-router.post("/", postOrder);
+router.post("/", handleCredentialClaims, verifyUserIdToken, postOrder);
+
+//Post Order Payment for a single Order
+const postOrderPayment = require("../controllers/orders/postOrderPayment.js");
+router.post(
+  "/order_item/payment",
+  handleCredentialClaims,
+  verifyUserIdToken,
+  postOrderPayment
+);
 
 module.exports = router;
