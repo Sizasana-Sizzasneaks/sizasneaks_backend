@@ -7,16 +7,16 @@ const getOrder = async function (req, res, next) {
   try {
     console.log("Get Order");
     //Check if OrderId was supplied
-    if (typeof req.body.orderId !== "undefined") {
+    if (typeof req.query.orderId !== "undefined") {
       var search = {}; //Search object for retrieving order.
       var projection = {}; //Projection object for retrieving orders.
 
       if (req.body.credential === USER_CREDENTIAL.ADMINISTRATOR) {
         //If Request is coming from an Administrator.
-        search = { _id: req.body.orderId };
+        search = { _id: req.query.orderId };
       } else if (req.body.credential === USER_CREDENTIAL.CUSTOMER) {
         //If Request is coming from a Customer.
-        search = { _id: req.body.orderId, customer_id: req.body.userId };
+        search = { _id: req.query.orderId, customer_id: req.body.userId };
       } else {
         //Returning if Credential type is not of Customer or Administrator.
         res.status = STATUS_CODE.UNAUTHORIZED;
@@ -34,7 +34,7 @@ const getOrder = async function (req, res, next) {
         var orderToReturn = retrieveOrderByIdResult.data[0];
 
         //Checking that order belongs to customer that requested it.
-        if (orderToReturn.customer_id === req.body.userId) {
+        if (req.body.credential === USER_CREDENTIAL.ADMINISTRATOR || orderToReturn.customer_id === req.body.userId) {
           res.statusCode = STATUS_CODE.SUCCESS; //Attaches Success Status Code to response object.
           res.send({ ok: true, data: orderToReturn }); //Sends order retrieved.
         } else {
