@@ -15,12 +15,15 @@ router.get("/", handleCredentialClaims, verifyUserIdToken, getOrders);
 const getOrder = require("../controllers/orders/getOrder.js");
 router.get("/order_item", handleCredentialClaims, verifyUserIdToken, getOrder);
 
-//Create Reviews Controller & Route
+//Update a Specific Order Controller & Route
+const putOrder = require("../controllers/orders/putOrder.js");
+router.put("/:orderId", handleCredentialClaims, verifyUserIdToken,putOrder);
+
 /* const postOrderItem = require("../controllers/orders/postOrderItem.js");
 router.post(
   "/orderItem",
   postOrderItem
-); */
+);  */
 
 const postOrder = require("../controllers/orders/postOrder.js");
 router.post("/", postOrder);
