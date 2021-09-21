@@ -1,9 +1,9 @@
 var { STATUS_CODE } = require("../constants/httpConstants.js");
-const updateOrder = require("./functions/updateOrder.js");
+const updateOrderItem = require("./functions/updateOrderItem.js");
 
-const putOrder = async function (req, res, next) {
+const putOrderItem = async function (req, res, next) {
   try {
-    console.log("Put Order status");
+    console.log("Put Order Item");
 
     //Checks that all function arguments are not undefined before execution.
     if (typeof req.body.credential !== "undefined") {
@@ -13,23 +13,23 @@ const putOrder = async function (req, res, next) {
 
         //Checks that all function arguments are not undefined before execution.
         if (
-          typeof req.params.orderId !== "undefined" &&
-          typeof req.body.orderData !== "undefined"
+          typeof req.params.orderItemId !== "undefined" &&
+          typeof req.body.orderItemData !== "undefined"
         ) {
 
-          //Performs the act of updating a specific order by the way of this function, supplying the order Id and the new order data.
-          var updateOrderResult = await updateOrder(
-            req.params.orderId,
-            req.body.orderData
+          //Performs the act of updating a specific order by the way of this function, supplying the order item Id and the new order data.
+          var updateOrderItemResult = await updateOrderItem(
+            req.params.orderItemId,
+            req.body.orderItemData
           );
 
-          //Checks if order update executed successfully.
-          if (updateOrderResult.ok === true) {
+          //Checks if order item update executed successfully.
+          if (updateOrderItemResult.ok === true) {
             res.statusCode = STATUS_CODE.SUCCESS; //Attaches Success Status Code to response object.
-            res.send(updateOrderResult); //Sends Success Object.
+            res.send(updateOrderItemResult); //Sends Success Object.
           } else {
             res.status = STATUS_CODE.BAD_REQUEST; //Attaches Bad Request Status Code to response object.
-            res.send(updateOrderResult); //Sends back object with ok set to false and with a message detailing the possible reason for execution failure.
+            res.send(updateOrderItemResult); //Sends back object with ok set to false and with a message detailing the possible reason for execution failure.
           }
         } else {
           res.status = STATUS_CODE.BAD_REQUEST; //Attaches Bad Request Status Code to response object.
@@ -59,4 +59,4 @@ const putOrder = async function (req, res, next) {
   }
 };
 
-module.exports = putOrder;
+module.exports = putOrderItem;
