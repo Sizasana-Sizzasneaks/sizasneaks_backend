@@ -6,7 +6,7 @@ const checkFullCartAvailability = async function (cartItems) {
       if (!cartItems[x].available) {
         return { ok: false, message: "Not All cart items are availability" };
       }
-    }
+    } 
   } catch (error) {
     return;
   }
