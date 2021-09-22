@@ -17,14 +17,14 @@ function createOrderSearchObject(searchBy, value) {
       case "DELIVERED":
         output = { hasBeenDelivered: value };
         break;
-        case "PAID":
+      case "PAID":
         output = { paymentComplete: value };
         break;
 
       case "DATE":
-        //Gets Current Date
-        var currentDate = value;
-        output = { createdAt: currentDate };
+        var dayAfter = new Date(value);
+        dayAfter.setDate(dayAfter.getDate() + 1);
+        output = { createdAt: { $gt: value, $lt: dayAfter } };
         break;
       case "ALL":
         output = {};
