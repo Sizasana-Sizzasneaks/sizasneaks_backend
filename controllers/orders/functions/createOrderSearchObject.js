@@ -17,6 +17,9 @@ function createOrderSearchObject(searchBy, value) {
       case "DELIVERED":
         output = { hasBeenDelivered: value };
         break;
+        case "PAID":
+        output = { paymentComplete: value };
+        break;
 
       case "DATE":
         //Gets Current Date
