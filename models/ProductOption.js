@@ -1,7 +1,10 @@
+const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
+
 const variant = require("./Variant.js");
 
-const productOption = {
-  //The color variable of a product option, of type string. 
+const productOption = new Schema({
+  //The color variable of a product option, of type string.
   color: {
     type: String,
     required: true,
@@ -11,6 +14,6 @@ const productOption = {
     type: [variant],
     required: true,
   },
-};
+});
 
 module.exports = productOption;

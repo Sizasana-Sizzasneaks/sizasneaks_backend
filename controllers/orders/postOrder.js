@@ -3,6 +3,8 @@ const retrieveCartByUserId = require("../cart/functions/retreiveCartByUserId.js"
 const prepareCartData = require("../cart/functions/prepareCartData.js");
 const createOrder = require("./functions/createOrder.js");
 
+const incrementProductQuantity = require("../products/functions/incrementProductQuantity.js");
+
 const postOrder = async function (req, res) {
   try {
     console.log("Post Order Controller");
@@ -21,6 +23,24 @@ const postOrder = async function (req, res) {
           if (prepareCartDataResult.ok === true) {
             console.log("Prepared Cart Data");
             console.log(prepareCartDataResult);
+            //Test
+
+            var incrementProductQuantityResult = await incrementProductQuantity(
+              "613d131973ee757c8c9a3520",
+              "Pink",
+              10,
+              -42
+            );
+
+            if (incrementProductQuantityResult.ok) {
+              console.log("Function Worked");
+              console.log(incrementProductQuantityResult);
+              res.status = 200;
+              res.send(incrementProductQuantityResult);
+            } else {
+              console.log("Function Failed");
+              console.log(incrementProductQuantityResult);
+            }
           } else {
             res.status = STATUS_CODE.INTERNAL_SERVER_ERROR;
             res.send(prepareCartDataResult);
