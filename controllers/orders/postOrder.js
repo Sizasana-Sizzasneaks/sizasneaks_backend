@@ -1,9 +1,12 @@
 const { USER_CREDENTIAL } = require("../constants/userType.js");
+const {
+  QUANTITY_CHANGE_MODES,
+} = require("../constants/quantityChangeModes.js");
 const retrieveCartByUserId = require("../cart/functions/retreiveCartByUserId.js");
 const prepareCartData = require("../cart/functions/prepareCartData.js");
 const createOrder = require("./functions/createOrder.js");
 
-const incrementProductQuantity = require("../products/functions/incrementProductQuantity.js");
+const changeProductOptionQuantity = require("../products/functions/changeProductOptionQuantity.js");
 
 const postOrder = async function (req, res) {
   try {
@@ -25,21 +28,24 @@ const postOrder = async function (req, res) {
             console.log(prepareCartDataResult);
             //Test
 
-            var incrementProductQuantityResult = await incrementProductQuantity(
-              "613d131973ee757c8c9a3520",
-              "Pink",
-              10,
-              -42
-            );
+            var changeProductOptionQuantityResult =
+              await changeProductOptionQuantity(
+                "613d131973ee757c8c9a3520",
+                "Pink",
+                10,
+                43,
+                QUANTITY_CHANGE_MODES.DECREMENT
+              );
 
-            if (incrementProductQuantityResult.ok) {
+            if (changeProductOptionQuantityResult.ok) {
               console.log("Function Worked");
-              console.log(incrementProductQuantityResult);
+              console.log(changeProductOptionQuantityResult);
               res.status = 200;
-              res.send(incrementProductQuantityResult);
+              res.send(changeProductOptionQuantityResult);
             } else {
               console.log("Function Failed");
-              console.log(incrementProductQuantityResult);
+              console.log(changeProductOptionQuantityResult);
+              res.send(changeProductOptionQuantityResult);
             }
           } else {
             res.status = STATUS_CODE.INTERNAL_SERVER_ERROR;
