@@ -1,6 +1,8 @@
 var { STATUS_CODE } = require("../constants/httpConstants.js");
 var { USER_CREDENTIAL } = require("../constants/userType.js");
 const updateOrder = require("./functions/updateOrder.js");
+const retrieveOrders = require("./functions/RetrieveOrders.js");
+const orderPayment = require("./functions/orderPayment.js");
 
 const postOrderPayment = async function (req, res, next) {
   try {
@@ -39,7 +41,7 @@ const postOrderPayment = async function (req, res, next) {
             var postOrderPaymentResult = await orderPayment(
               req.body.userId,
               req.body.orderId,
-              req.body.orderToReturn,
+              orderToReturn,
               req.body.billingDetails
             );
 
@@ -57,21 +59,16 @@ const postOrderPayment = async function (req, res, next) {
 
               if (updateOrderResult.ok) {
                 res.status = STATUS_CODE.SUCCESS;
-                res.send({ok:true, message: "Payment Complete"});
+                res.send({ ok: true, message: "Payment Complete" });
               } else {
                 res.status = STATUS_CODE.BAD_REQUEST;
                 res.send(updateOrderResult);
               }
 
-              //Sending back a corresponding success Response
-              res.status = STATUS_CODE.SUCCESS;
-              res.send(postOrderPaymentResult);
             } else {
               res.status = STATUS_CODE.BAD_REQUEST;
               res.send(postOrderPaymentResult);
             }
-            res.statusCode = STATUS_CODE.SUCCESS; //Attaches Success Status Code to response object.
-            res.send({ ok: true });
           } else {
             res.status = STATUS_CODE.UNAUTHORIZED;
             res.send({
