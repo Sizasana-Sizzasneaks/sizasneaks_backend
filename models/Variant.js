@@ -1,4 +1,7 @@
-const variant = {
+const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
+
+const variant = new Schema({
   //Product options contain multiple variants that are different in size.
   //This is the size variable.
   size: {
@@ -11,6 +14,6 @@ const variant = {
     min: 0,
     required: true,
   },
-};
+});
 
 module.exports = variant;
