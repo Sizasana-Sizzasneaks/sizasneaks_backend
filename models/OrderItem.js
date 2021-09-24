@@ -3,7 +3,6 @@ const Schema = mongoose.Schema;
 
 const orderItem = new Schema(
   {
-    _id: Schema.Types.ObjectId,
     productId: {
       type: String,
       required: true,
