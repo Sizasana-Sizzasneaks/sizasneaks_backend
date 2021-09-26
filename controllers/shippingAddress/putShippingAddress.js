@@ -38,13 +38,13 @@ const putShippingAddress = async function (req, res) {
       res.status = STATUS_CODE.UNAUTHORIZED;
       res.send({
         ok: false,
-        error: "Access Denied Insufficient Credentials",
+        message: "Access Denied Insufficient Credentials",
       });
     }
   } catch (error) {
     console.log(error);
     res.status = STATUS_CODE.INTERNAL_SERVER_ERROR;
-    res.send({ ok: false, error: "Unknown Server Error" }); //Sending back a failure response due to an unexpected error being thrown.
+    res.send({ ok: false, message: "Unknown Server Error" }); //Sending back a failure response due to an unexpected error being thrown.
   }
 };
 

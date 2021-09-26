@@ -29,7 +29,7 @@ const getProductBrands = async (req, res) => {
   } catch (error) {
     console.log(error);
     res.status = STATUS_CODE.INTERNAL_SERVER_ERROR; //Attaches Internal Error Status Code to response object.
-    res.send({ ok: false, error: "Unknown Server Error" });
+    res.send({ ok: false, message: "Unknown Server Error" });
   }
 };
 module.exports = getProductBrands;

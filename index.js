@@ -32,6 +32,7 @@ const reviewsRoutes = require("./routes/reviews.js");
 const userRoutes = require("./routes/user.js");
 const cartRoutes = require("./routes/cart.js");
 const orderRoutes = require("./routes/orders.js");
+const revenueRoutes = require("./routes/revenue.js");
 
 //Appending clusters of routes
 app.use("/products", productsRoutes);
@@ -39,6 +40,7 @@ app.use("/reviews", reviewsRoutes);
 app.use("/user", userRoutes);
 app.use("/cart", cartRoutes);
 app.use("/orders", orderRoutes);
+app.use("/revenue", revenueRoutes);
 
 //Connecting to MongoDB Database and Running This Server.
 mongoose

@@ -74,7 +74,7 @@ const deleteReview = async function (req, res, next) {
   } catch (error) {
     console.log(error);
     res.status = STATUS_CODE.INTERNAL_SERVER_ERROR; //Attaches Internal Error Status Code to response object.
-    res.send({ ok: false, error: "Unknown Server Error" }); //Sends back object with ok set to false and with a message detailing the reason for execution failure.
+    res.send({ ok: false, message: "Unknown Server Error" }); //Sends back object with ok set to false and with a message detailing the reason for execution failure.
   }
 };
 module.exports = deleteReview;

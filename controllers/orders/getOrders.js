@@ -71,7 +71,7 @@ const getOrders = async function (req, res, next) {
     //Execution when unexpected error occurs when retrieving an order.
     console.log(error);
     res.status = STATUS_CODE.INTERNAL_SERVER_ERROR; //Attaches Internal Error Status Code to response object.
-    res.send({ ok: false, error: "Unknown Server Error" }); //Sending back a failure response due to an unexpected error being thrown.
+    res.send({ ok: false, message: "Unknown Server Error" }); //Sending back a failure response due to an unexpected error being thrown.
   }
 };
 module.exports = getOrders;
