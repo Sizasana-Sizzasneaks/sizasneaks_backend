@@ -4,7 +4,7 @@ const OrderItem = require("../../../models/OrderItem.js");
 async function updateOrderItem(orderItemId, orderItemData) {
   try {
     //Checks that all function arguments are not undefined before execution.
-    if (typeof orderId !== "undefined" && typeof orderData !== "undefined") {
+    if (typeof orderItemId !== "undefined" && typeof orderItemData !== "undefined") {
       return OrderItem.updateOne(
         {
           _id: orderItemId,
