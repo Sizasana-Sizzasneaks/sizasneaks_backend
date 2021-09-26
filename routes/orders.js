@@ -19,6 +19,10 @@ router.get("/order_item", handleCredentialClaims, verifyUserIdToken, getOrder);
 const putOrder = require("../controllers/orders/putOrder.js");
 router.put("/:orderId", handleCredentialClaims, verifyUserIdToken, putOrder);
 
+//Cancel an order Controller and route
+const putCancelOrder = require("../controllers/orders/putCancelOrder.js");
+router.put("/cancel", putCancelOrder);
+
 //Post Order - Creating and Order
 const postOrder = require("../controllers/orders/postOrder.js");
 router.post("/", handleCredentialClaims, verifyUserIdToken, postOrder);
