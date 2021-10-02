@@ -23,6 +23,7 @@ const postOrder = async function (req, res) {
           );
 
         if (retrieveShippingAddressByIdResult.ok) {
+          console.log(retrieveShippingAddressByIdResult);
           var orderAddress =
             retrieveShippingAddressByIdResult.data.shippingAddresses[0];
 
