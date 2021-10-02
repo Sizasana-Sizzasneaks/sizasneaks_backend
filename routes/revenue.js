@@ -11,8 +11,6 @@ const handleCredentialClaims = require("../controllers/user/functions/handleCred
 const getTopProducts = require("../controllers/revenue/getTopProducts.js");
 router.get(
   "/top_products",
-  handleCredentialClaims,
-  verifyUserIdToken,
   getTopProducts
 );
 
