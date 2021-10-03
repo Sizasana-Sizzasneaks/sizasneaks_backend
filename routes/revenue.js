@@ -16,4 +16,7 @@ router.get(
   getTopProducts
 );
 
+const getUnitsSold = require("../controllers/revenue/getUnitsSold.js");
+router.get("/units_sold", getUnitsSold);
+
 module.exports = router;
