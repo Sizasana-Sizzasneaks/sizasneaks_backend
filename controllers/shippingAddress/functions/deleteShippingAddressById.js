@@ -14,6 +14,7 @@ async function deleteShippingAddressById(userId, addressId) {
       {
         $pull: {
           shippingAddresses: {
+            
             _id: addressId,
           },
         },

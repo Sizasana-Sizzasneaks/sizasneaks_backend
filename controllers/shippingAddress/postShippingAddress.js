@@ -16,13 +16,16 @@ const postShippingAddress = async function (req, res) {
           var createShippingAddressResult = await createShippingAddress(
             req.body.userId,
             req.body.addressName,
+            req.body.firstName,
+            req.body.lastName,
             req.body.addressLineOne,
             req.body.addressLineTwo,
             req.body.city,
             req.body.province,
             req.body.country,
             req.body.zipCode,
-            req.body.contactNumber
+            req.body.contactNumber,
+            req.body.deliveryInstructions
           );
           //Checking if Creating the new cart item was successful.
           if (createShippingAddressResult.ok === true) {

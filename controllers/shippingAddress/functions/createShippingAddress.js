@@ -4,13 +4,16 @@ const Customer = require("../../../models/Customer.js");
 async function createShippingAddress(
   userId,
   addressName,
+  firstName,
+  lastName,
   addressLineOne,
   addressLineTwo,
   city,
   province,
   country,
   zipCode,
-  contactNumber
+  contactNumber,
+  deliveryInstructions
 ) {
   console.log("add to Users shipping adr");
   // check arguments are not undefined
@@ -18,6 +21,8 @@ async function createShippingAddress(
     // create a projection to query the database
     var shippingAddress = {
       addressName: addressName,
+      firstName:firstName,
+      lastName: lastName,
       addressLineOne: addressLineOne,
       addressLineTwo: addressLineTwo,
       city: city,
@@ -25,6 +30,7 @@ async function createShippingAddress(
       country: country,
       zipCode: zipCode,
       contactNumber: contactNumber,
+      deliveryInstructions:deliveryInstructions
     };
 
     // use Moongose API to search through the user
