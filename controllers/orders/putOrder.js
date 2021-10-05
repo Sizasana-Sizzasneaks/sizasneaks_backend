@@ -13,7 +13,7 @@ const putOrder = async function (req, res, next) {
 
         //Checks that all function arguments are not undefined before execution.
         if (
-          typeof req.params.productId !== "undefined" &&
+          typeof req.params.orderId !== "undefined" &&
           typeof req.body.orderData !== "undefined"
         ) {
 

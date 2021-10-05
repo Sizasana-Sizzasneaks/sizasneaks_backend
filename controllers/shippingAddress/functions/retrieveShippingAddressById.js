@@ -1,4 +1,4 @@
-const  mongoose  = require("mongoose");
+const mongoose = require("mongoose");
 const Customer = require("../../../models/Customer.js");
 
 async function retrieveShippingAddressById(userId, addressId) {
@@ -12,8 +12,14 @@ async function retrieveShippingAddressById(userId, addressId) {
     )
       .lean()
       .then((docs) => {
+        console.log(docs);
+
         if (docs.length !== 0) {
-          return { ok: true, data: docs[0] }; //Returning single first document that was found.
+          if (typeof docs[0].shippingAddresses !== "undefined") {
+            return { ok: true, data: docs[0] }; //Returning single first document that was found.
+          } else {
+            return { ok: false, data: docs, message: "No address match found" }; //Returning when no matching Address is found.
+          }
         } else {
           return { ok: false, data: docs, message: "No address match found" }; //Returning when no matching Address is found.
         }
