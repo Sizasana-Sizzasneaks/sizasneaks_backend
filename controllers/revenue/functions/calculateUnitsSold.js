@@ -1,6 +1,7 @@
 const retrieveOrderItem = require("../../orders/functions/retrieveOrderItem.js");
 const OrderItem = require("../../../models/OrderItem.js");
 
+const date = new Date();
 async function calculateUnitsSold(orderItemId){
 
     //- Check is Admin
@@ -9,23 +10,32 @@ async function calculateUnitsSold(orderItemId){
 		
 		// Formating the date and time
 		// by using date.format() method
-		var currentDate = new Date();//(works)
-		var currentMonth = currentDate.getMonth();//(works)
+		//(works)
+		var currentMonth = date.getMonth() + 1;//(works)
 		console.log(currentMonth);//(works)
 
 		var startMonth = currentMonth - 5;//(works)
 		console.log(startMonth);//(works)
 
+		
+
 		//(works)
 		var retrieveOrderItemResult = await retrieveOrderItem({_id:orderItemId}, {quantity:1, createdAt:1});
 		
 		console.log (retrieveOrderItemResult);
-
-		return OrderItem.find({"createdAt":{$month:9}});
+		//var orderItem = {_id: orderItemId};
+		//var monthOrderPlaced = date.getDate(retrieveOrderItemResult); //not getting correct
+		//console.log (monthOrderPlaced);
+		console.log("Below should be the created at Date");
+		/* return OrderItem.find({created_at: {
+			$gte: ISODate("2010-04-29T00:00:00.000Z"),
+			$lt: ISODate("2010-05-01T00:00:00.000Z")
+		}}); */
 	
 		//var month = currentDate.getMonth();
 
-		
+	
+			
 
 
 	    //- Get Order items from beginning of start month till Now.
