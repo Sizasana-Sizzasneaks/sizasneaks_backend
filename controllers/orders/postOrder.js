@@ -2,6 +2,7 @@ const { USER_CREDENTIAL } = require("../constants/userType.js");
 const {
   QUANTITY_CHANGE_MODES,
 } = require("../constants/quantityChangeModes.js");
+const { FUNDS } = require("../constants/monetaryConstants.js");
 const retrieveCartByUserId = require("../cart/functions/retreiveCartByUserId.js");
 const prepareCartData = require("../cart/functions/prepareCartData.js");
 const constructOrderItem = require("./functions/constructOrderItem.js");
@@ -83,7 +84,7 @@ const postOrder = async function (req, res) {
                   customer_id: req.body.userId,
                   orderItems: arrayOfOrderItemId,
                   shippingAddress: orderAddress,
-                  shippingCost: 60,
+                  shippingCost: FUNDS.DELIVERY_CHARGE,
                   paymentComplete: false,
                   hasShipped: false,
                   hasBeenDelivered: false,

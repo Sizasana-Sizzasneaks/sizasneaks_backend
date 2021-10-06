@@ -34,6 +34,7 @@ async function constructOrderItem(productId, productOption, quantity) {
               _id: productId,
             },
             {
+              productName:1,
               supplierTaxAmount: 1,
               supplierCost: 1,
               sellingPriceTaxAmount: 1,
@@ -51,6 +52,7 @@ async function constructOrderItem(productId, productOption, quantity) {
             // Lets Create an Order Item
 
             var createOrderItemResult = await createOrderItem({
+              productName: productDetails.productName,
               productId: productId,
               option: {
                 color: productOption.color,

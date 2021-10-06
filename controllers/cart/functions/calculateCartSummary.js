@@ -1,3 +1,5 @@
+var { FUNDS } = require("../../constants/monetaryConstants.js");
+
 // summary details calculation
 async function calculateCartSummary(cart) {
   try {
@@ -17,7 +19,7 @@ async function calculateCartSummary(cart) {
       cartSummary.cartCount = cartCount;
       cartSummary.cartTotal = cartTotal;
       cartSummary.cart = cart;
-      cartSummary.cartDeliveryCharge = 15;
+      cartSummary.cartDeliveryCharge = FUNDS.DELIVERY_CHARGE;
 
       return { ok: true, data: cartSummary };
     } else {

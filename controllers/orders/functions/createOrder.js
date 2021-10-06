@@ -9,9 +9,9 @@ async function createOrder(orderData) {
 
       return order
         .save()
-        .then(() => {
+        .then((doc) => {
           //Returns a successful object and message when the review has been saved as a document in the collection.
-          return { ok: true, message: "Order Created" };
+          return { ok: true, message: "Order Created", id: doc._id };
         })
         .catch((error) => {
           console.log(error);

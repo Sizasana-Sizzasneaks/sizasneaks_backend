@@ -7,6 +7,10 @@ const orderItem = new Schema(
       type: String,
       required: true,
     },
+    productName:{
+      type:String,
+      required: true
+    },
     option: {
       //The color of the product option.
       color: {
