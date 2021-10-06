@@ -1,14 +1,18 @@
 require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
-require("./models/OrderItem.js");
 const cors = require("cors");
 
 const app = express();
 
 //Enabling Cors for all routes
 var corsOptions = {
-  origin: "*",
+  origin: [
+    "https://sizasana-ecommerce-platform.web.app",
+    "https://sizasana-ecommerce-platform.firebaseapp.com",
+    "https://sizasana-ecommerce-admin.web.app",
+    "https://sizasana-ecommerce-admin.firebaseapp.com",
+  ],
   optionsSuccessStatus: 200, // For legacy browser support
 };
 
@@ -32,7 +36,6 @@ const reviewsRoutes = require("./routes/reviews.js");
 const userRoutes = require("./routes/user.js");
 const cartRoutes = require("./routes/cart.js");
 const orderRoutes = require("./routes/orders.js");
-const revenueRoutes = require("./routes/revenue.js");
 
 //Appending clusters of routes
 app.use("/products", productsRoutes);
@@ -40,7 +43,6 @@ app.use("/reviews", reviewsRoutes);
 app.use("/user", userRoutes);
 app.use("/cart", cartRoutes);
 app.use("/orders", orderRoutes);
-app.use("/revenue", revenueRoutes);
 
 //Connecting to MongoDB Database and Running This Server.
 mongoose
