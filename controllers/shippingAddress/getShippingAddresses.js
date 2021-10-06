@@ -1,4 +1,4 @@
-const retrieveShippingAddresses = require("./functions/retrieveShippingAddresses.js");
+const retrieveShippingAddresses = require("./functions/RetrieveShippingAddresses.js");
 var { STATUS_CODE } = require("../constants/httpConstants.js");
 
 const getShippingAddresses = async function (req, res, next) {
