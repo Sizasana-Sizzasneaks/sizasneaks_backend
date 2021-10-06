@@ -1,7 +1,7 @@
 const {
   QUANTITY_CHANGE_MODES,
 } = require("../../constants/quantityChangeModes.js");
-const deleteOrderItem = require("./deleteOrderItem.js");
+const deleteOrderItem = require("./deleteOrderitem.js");
 const retrieveProducts = require("../../products/functions/retrieveProducts.js");
 const changeProductOptionQuantity = require("../../products/functions/changeProductOptionQuantity.js");
 const createOrderItem = require("../functions/createOrderItem.js");
