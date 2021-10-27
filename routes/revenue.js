@@ -15,5 +15,12 @@ router.get(
   verifyUserIdToken,
   getTopProducts
 );
+const getTopProductsRevenue = require("../controllers/revenue/getTopProductsRevenue.js");
+router.get(
+  "/product/:productId",
+  handleCredentialClaims,
+  verifyUserIdToken,
+  getTopProductsRevenue
+)
 
 module.exports = router;
