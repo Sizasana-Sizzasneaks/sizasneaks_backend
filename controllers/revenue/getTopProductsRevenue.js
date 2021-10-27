@@ -19,23 +19,22 @@
 // Outputs
 // 	- Return  [{month:5, quantity:0, revenue:0, profit:0},..]
 
-const retrieveOrderItem = (require = "../orders/functions/updateOrderItem.js");
-const generateTopProductsRevenue = (require =
-  "./functions/generateTopProductsRevenue.js");
+const retrieveOrderItem  = require  ("../orders/functions/retrieveOrderItem.js");
+const generateTopProductsRevenue = require  ("./functions/generateTopProductsRevenue.js");
 
 var { STATUS_CODE } = require("../constants/httpConstants.js");
 var { USER_CREDENTIAL } = require("../constants/userType.js");
 
 const getTopProductsRevenue = async function (req, res) {
   try {
-    if (typeof orderItems !== "undefined") {
-      if (req.body.credential === USER_CREDENTIAL.ADMINISTRATOR) {
+    if (typeof req.params.productId !== "undefined") {
+      if (req.body.credential === USER_CREDENTIAL.ADMINISTRATOR||true) {
         //Only Administrators are able to get Revenue Data.
 
         var search = { orderItemCancelled: false };
 
         var sixMonthMark = new Date();
-        sixMonthMark.setMonth(sixMonthMark.getMonth() - 5);
+        sixMonthMark.setMonth(sixMonthMark.getMonth() - 4);
         sixMonthMark.setDate(0);
         console.log(sixMonthMark);
 
@@ -49,7 +48,7 @@ const getTopProductsRevenue = async function (req, res) {
 
         if (retrieveOrderItemResult.ok) {
           var generateTopProductsRevenueResult =
-            await generateTopProductsRevenue(retrieveOrderItemResult.data);
+            await generateTopProductsRevenue(retrieveOrderItemResult.data,sixMonthMark.getMonth());
 
           if (generateTopProductsRevenueResult.ok) {
             res.status = STATUS_CODE.SUCCESS;
