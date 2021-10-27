@@ -4,10 +4,14 @@ function calculateAverageRatingScore(reviews) {
 
     //Calculating the average rating of all reviews supplied.
     var ratingSum = 0;
+    var reviewsLength = 0;
     reviews.forEach((review) => {
-      ratingSum += review.rating;
+      if (review.approved) {
+        ratingSum += review.rating;
+        reviewsLength++;
+      }
     });
-    var ratingAverage = ratingSum / reviews.length;
+    var ratingAverage = ratingSum / reviewsLength;
     output = Math.round(ratingAverage); //Storing that averageScore value in the function output object..
 
     return { ok: true, data: output }; //Returning successfully when all calculations and operations happen successfully.

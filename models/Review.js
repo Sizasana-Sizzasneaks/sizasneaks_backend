@@ -29,6 +29,10 @@ const ReviewSchema = new Schema(
       type: String,
       required: true,
     },
+    approved:{
+      type: Boolean,
+      required:true
+    },
     //An Array that contains all the replies associated with this review. 
     replies: {
       type: [ReviewReply],

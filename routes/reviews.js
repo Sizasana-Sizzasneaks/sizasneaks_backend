@@ -7,6 +7,9 @@ const verifyUserIdToken = require("../controllers/user/functions/verifyUserIdTok
 //Handle Credential Claims
 const handleCredentialClaims = require("../controllers/user/functions/handleCredentialClaims.js");
 
+//Update Average Product Review Rating Score
+const updateProductAverageRatingScore = require("../controllers/reviews/functions/updateProductAverageRatingScore.js");
+
 //Get Reviews Controller & Route
 const getReviews = require("../controllers/reviews/getReviews.js");
 router.get(
@@ -18,13 +21,12 @@ router.get(
 
 //Create Reviews Controller & Route
 const postReview = require("../controllers/reviews/postReview.js");
-const updateProductAverageRatingScore = require("../controllers/reviews/functions/updateProductAverageRatingScore.js");
+
 router.post(
   "/:product_id",
   handleCredentialClaims,
   verifyUserIdToken,
-  postReview,
-  updateProductAverageRatingScore
+  postReview
 );
 
 //Delete Reviews Controller & Route
@@ -33,7 +35,8 @@ router.delete(
   "/:review_id",
   handleCredentialClaims,
   verifyUserIdToken,
-  deleteReview
+  deleteReview,
+  updateProductAverageRatingScore
 );
 
 //Admin Reply to Reviews
@@ -44,6 +47,18 @@ router.post(
   handleCredentialClaims,
   verifyUserIdToken,
   postReviewReply
+);
+
+//Approve a Review
+const approveReview = require("../controllers/reviews/approveReview.js");
+
+
+router.put(
+  "/:review_id",
+  handleCredentialClaims,
+  verifyUserIdToken,
+  approveReview,
+  updateProductAverageRatingScore
 );
 
 module.exports = router;

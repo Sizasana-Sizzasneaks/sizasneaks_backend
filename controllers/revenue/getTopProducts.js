@@ -18,7 +18,7 @@ const getTopProducts = async function (req, res) {
       //Get 30 Days ago Date
       var thirtyDayMark = new Date();
       thirtyDayMark.setDate(thirtyDayMark.getDate() - 30);
-      console.log(thirtyDayMark);
+
       // Add Date Search Criteria to Search Object
       search = {
         ...search,

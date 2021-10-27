@@ -31,6 +31,7 @@ async function createProductReview(userId, productId, reviewData) {
             retrieveUserDetailsResult.data.lastName,
           product_id: productId,
           rating: reviewData.rating,
+          approved: false,
           body: reviewData.body,
         }); 
 

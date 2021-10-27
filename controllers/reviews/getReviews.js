@@ -13,19 +13,27 @@ const getReviews = async function (req, res, next) {
         customer_id: 1,
         rating: 1,
         body: 1,
+        approved: 1,
         createdAt: 1,
       };
+      var search = { product_id: req.params.product_id };
 
       //Checking if credential is set to administrator.
       if (req.body.credential === "administrator") {
         //Adding Review Replies to projection if requesting client has a credential type of administrator.
         projection = { ...projection, replies: 1 };
       }
+
+      if (
+        req.body.credential === "customer" ||
+        req.body.credential === "unknown"
+      ) {
+        //Customers Must only see approved Reviews
+        search = { ...search, approved: true };
+      }
+
       //Performing retrieval of customer reviews through the use of a review helper function - Supplying the function with the corresponding product id and fields projection.
-      var reviewsResult = await retrieveReviews(
-        req.params.product_id,
-        projection
-      );
+      var reviewsResult = await retrieveReviews(search, projection);
 
       //Checking if retrieval of product reviews executed successfully.
       if (reviewsResult.ok === true) {

@@ -6,10 +6,11 @@ const updateProductAverageRatingScore = async (req, res, next) => {
   if (typeof req.params.product_id !== "undefined") {
     var projection = {
       rating: 1,
+      approved:1
     };
     //Get all Reviews By Product
     var reviewsResult = await retrieveReviews(
-      req.params.product_id,
+      { product_id: req.params.product_id, approved: true },
       projection
     );
 

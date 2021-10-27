@@ -1,11 +1,11 @@
 const mongoose = require("mongoose");
 const Review = require("../../../models/Review.js");
 
-function retrieveReviews(product_id, projection) {
+function retrieveReviews(search, projection) {
   //Checks that all function arguments are not undefined before execution.
-  if (typeof product_id !== "undefined" && typeof projection !== "undefined") {
+  if (typeof search !== "undefined" && typeof projection !== "undefined") {
     //Performs the search using the Mongoose API.
-    return Review.find({ product_id: product_id }, projection)
+    return Review.find(search, projection)
       .sort({ createdAt: "descending" }) //Sorting the reviews to be returned by their timestamp (descending order).
       .then((docs) => {
         if (docs.length !== 0) {
@@ -37,7 +37,7 @@ function retrieveReviews(product_id, projection) {
     return {
       ok: false,
       message:
-        "RetrieveReviews: Product_id and/or projection arguments are undefined.",
+        "RetrieveReviews: Search object and/or projection arguments are undefined.",
     };
   }
 }

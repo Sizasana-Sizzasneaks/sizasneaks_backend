@@ -50,6 +50,7 @@ const deleteReview = async function (req, res, next) {
         if (reviewsResult.ok === true) { // Checking if review deletion was successful.
           res.statusCode = STATUS_CODE.SUCCESS; //Attaches Success Status Code to response object.
           res.send(reviewsResult); //Sending back a success object, containing a success message.
+          next();
         } else {
           res.status = STATUS_CODE.INTERNAL_SERVER_ERROR; //Attaches Internal Error Status Code to response object.
           res.send(reviewsResult); // Sending back an error object with the corresponding error message, specifying more details about the error.
