@@ -22,7 +22,7 @@ async function cancelOrderItem(orderItem){
                 itemCancelled = true;
               var changeProductOptionQuantityResult =
                 await changeProductOptionQuantity(
-                  orderItem.productId,
+                  orderItem.productId, 
                   orderItem.option.color,
                   orderItem.option.size,
                   orderItem.quantity,
