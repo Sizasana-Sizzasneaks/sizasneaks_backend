@@ -71,7 +71,7 @@ function doesItAlreadyExist(productId, theArray) {
   return output;
 }
 
-function updateArrayItem(produ, quantity, theArray) {
+function updateArrayItem(productId, quantity, theArray) {
   for (var element of theArray) {
     if (element.productId === productId) {
       element.quantity = element.quantity + quantity;
