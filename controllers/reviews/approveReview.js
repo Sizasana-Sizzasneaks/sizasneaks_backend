@@ -15,6 +15,7 @@ const approveReview = async function (req, res, next) {
         var reviewsResult = await approveSingleReview(req.params.review_id);
         if (reviewsResult.ok === true) {
           // Checking if approving review was successful.
+          
           res.statusCode = STATUS_CODE.SUCCESS; //Attaches Success Status Code to response object.
           res.send(reviewsResult); //Sending back a success object, containing a success message.
           next();

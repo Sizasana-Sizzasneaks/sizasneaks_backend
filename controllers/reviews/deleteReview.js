@@ -48,6 +48,7 @@ const deleteReview = async function (req, res, next) {
         //Performing the deletion of a product review by passing the review id supplied to he necessary review helper function.
         var reviewsResult = await deleteReviewById(req.params.review_id);
         if (reviewsResult.ok === true) { // Checking if review deletion was successful.
+          
           res.statusCode = STATUS_CODE.SUCCESS; //Attaches Success Status Code to response object.
           res.send(reviewsResult); //Sending back a success object, containing a success message.
           next();
