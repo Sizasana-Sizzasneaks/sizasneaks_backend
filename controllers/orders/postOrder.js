@@ -11,7 +11,7 @@ const retrieveShippingAddressById = require("../shippingAddress/functions/retrie
 const clearUserCart = require("../cart/functions/clearUserCart.js");
 const { STATUS_CODE } = require("../constants/httpConstants.js");
 
-const postOrder = async function (req, res) {
+const postOrder = async function (req, res, next) {
   try {
     console.log("Post Order Controller");
     if (req.body.credential === USER_CREDENTIAL.CUSTOMER) {
@@ -100,6 +100,8 @@ const postOrder = async function (req, res) {
 
                   res.status = STATUS_CODE.SUCCESS;
                   res.send(createOrderResult);
+                  req.body.orderCreated = createOrderResult.id;
+                  next();
                 } else {
                   res.status = STATUS_CODE.INTERNAL_SERVER_ERROR;
                   res.send(createOrderResult);

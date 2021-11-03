@@ -25,7 +25,8 @@ router.put("/order/cancel", putCancelOrder);
 
 //Post Order - Creating and Order
 const postOrder = require("../controllers/orders/postOrder.js");
-router.post("/", handleCredentialClaims, verifyUserIdToken, postOrder);
+const placeOrderEmail = require("../controllers/email/placeOrderEmail.js");
+router.post("/", handleCredentialClaims, verifyUserIdToken, postOrder, placeOrderEmail);
 
 //Post Order Payment for a single Order
 const postOrderPayment = require("../controllers/orders/postOrderPayment.js");
