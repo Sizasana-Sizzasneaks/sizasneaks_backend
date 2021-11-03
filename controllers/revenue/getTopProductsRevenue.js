@@ -19,8 +19,8 @@
 // Outputs
 // 	- Return  [{month:5, quantity:0, revenue:0, profit:0},..]
 
-const retrieveOrderItem  = require  ("../orders/functions/retrieveOrderItem.js");
-const generateTopProductsRevenue = require  ("./functions/generateTopProductsRevenue.js");
+const retrieveOrderItem = require("../orders/functions/retrieveOrderItem.js");
+const generateTopProductsRevenue = require("./functions/generateTopProductsRevenue.js");
 
 var { STATUS_CODE } = require("../constants/httpConstants.js");
 var { USER_CREDENTIAL } = require("../constants/userType.js");
@@ -28,7 +28,7 @@ var { USER_CREDENTIAL } = require("../constants/userType.js");
 const getTopProductsRevenue = async function (req, res) {
   try {
     if (typeof req.params.productId !== "undefined") {
-      if (req.body.credential === USER_CREDENTIAL.ADMINISTRATOR||true) {
+      if (req.body.credential === USER_CREDENTIAL.ADMINISTRATOR) {
         //Only Administrators are able to get Revenue Data.
 
         var search = { orderItemCancelled: false };
@@ -48,7 +48,10 @@ const getTopProductsRevenue = async function (req, res) {
 
         if (retrieveOrderItemResult.ok) {
           var generateTopProductsRevenueResult =
-            await generateTopProductsRevenue(retrieveOrderItemResult.data,sixMonthMark.getMonth());
+            await generateTopProductsRevenue(
+              retrieveOrderItemResult.data,
+              sixMonthMark.getMonth()
+            );
 
           if (generateTopProductsRevenueResult.ok) {
             res.status = STATUS_CODE.SUCCESS;
@@ -58,8 +61,22 @@ const getTopProductsRevenue = async function (req, res) {
             res.send(generateTopProductsResult);
           }
         } else {
-          res.status = STATUS_CODE.INTERNAL_SERVER_ERROR;
-          res.send(retrieveOrderItemResult);
+          if (retrieveOrderItemResult.message === "No order items found") {
+            generateTopProductsRevenueResult = await generateTopProductsRevenue(
+              [],
+              sixMonthMark.getMonth()
+            );
+            if (generateTopProductsRevenueResult.ok) {
+              res.status = STATUS_CODE.SUCCESS;
+              res.send(generateTopProductsRevenueResult);
+            } else {
+              res.status = STATUS_CODE.INTERNAL_SERVER_ERROR;
+              res.send(generateTopProductsResult);
+            }
+          } else {
+            res.status = STATUS_CODE.BAD_REQUEST;
+            res.send(retrieveOrderItemResult);
+          }
         }
       } else {
         //Sending back a unauthorized response when the user is not of type customer.

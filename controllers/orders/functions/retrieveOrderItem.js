@@ -13,7 +13,7 @@ function retrieveOrderItem(search, projection) {
               //Returning when there is no matching order found.
               ok: false,
               data: docs,
-              message: "No orders items Found",
+              message: "No order items found",
             };
           }
         })

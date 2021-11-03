@@ -21,9 +21,14 @@ router.get(
   handleCredentialClaims,
   verifyUserIdToken,
   getTopProductsRevenue
-)
+);
 
 const getUnitsSold = require("../controllers/revenue/getUnitsSold.js");
-router.get("/units_sold", getUnitsSold);
+router.get(
+  "/units_sold",
+  handleCredentialClaims,
+  verifyUserIdToken,
+  getUnitsSold
+);
 
 module.exports = router;

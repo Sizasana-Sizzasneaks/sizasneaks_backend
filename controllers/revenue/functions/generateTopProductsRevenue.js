@@ -24,7 +24,7 @@ async function generateTopProductsRevenue(orderItems, sixMonthMark) {
         profit: 0,
       };
     }
-    console.log(orderItemObjects);
+    
 
     for (var item of orderItems) {
         var revenue =   item.quantity * item.sellingPriceAmount
