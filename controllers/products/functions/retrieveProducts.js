@@ -19,7 +19,7 @@ function retrieveProducts(search, projection) {
         return { ok: false, message: "Invalid Product Id" }; //Returning when the supplied search object contains an invalid product id value (invalid format).
       } else {
         console.log(error);
-        return { ok: false, message: "Error When Getting Products" }; //Return a general error when the retrieving of products is unsuccessful.
+        return { ok: false, message: "Error when getting products" }; //Return a general error when the retrieving of products is unsuccessful.
       }
     });
 }

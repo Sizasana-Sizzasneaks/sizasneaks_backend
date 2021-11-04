@@ -23,8 +23,16 @@ function retrieveOrders(search, projection) {
           }
         })
         .catch((error) => {
-          console.log(error);
-          return { ok: false, message: "Error when getting orders" }; //Returning a general error when an unknown error is thrown when searching for reviews.
+          if (
+            //Checking if the error thrown is due to an invalid value specified on the "_id" variable.
+            error.path === "_id" &&
+            error instanceof mongoose.CastError &&
+            error.kind === "ObjectId"
+          ) {
+            return { ok: false, message: "Invalid Order Id" }; //Returning a general error when an unknown error is thrown when searching for reviews.
+          } else {
+            return { ok: false, message: "Error when getting orders" }; //Returning a general error when an unknown error is thrown when searching for reviews.
+          }
         });
     } else {
       return {
